@@ -1,3 +1,5 @@
+import { sinBarrasFinales } from "../utils/texto";
+
 /**
  * Capa de acceso al API REST de BuildCorp (Django REST Framework + SimpleJWT).
  *
@@ -19,7 +21,7 @@
  *   await api.post("/contratistas/", { razon_social: "..." });
  */
 
-export const API_URL = (import.meta.env?.VITE_API_URL || "http://localhost:8000/api/v1").replace(/\/+$/, "");
+export const API_URL = sinBarrasFinales(import.meta.env?.VITE_API_URL || "http://localhost:8000/api/v1");
 
 const CLAVE_REFRESH = "buildcorp.refresh";
 

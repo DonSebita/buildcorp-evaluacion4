@@ -23,7 +23,7 @@ echo "==> Entorno virtual y dependencias"
 sudo -u "$USUARIO" python3 -m venv "$APP_DIR/.venv"
 sudo -u "$USUARIO" "$APP_DIR/.venv/bin/pip" install -q -r "$APP_DIR/requirements.txt"
 
-if [ ! -f "$APP_DIR/.env" ]; then
+if [[ ! -f "$APP_DIR/.env" ]]; then
   echo "==> Creando .env"
   cat > "$APP_DIR/.env" <<EOF
 DEBUG=False

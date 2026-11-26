@@ -47,7 +47,7 @@
       <div id="alertas"><div class="hoja"><div class="hoja-cuerpo"><span class="esqueleto" style="height:8rem"></span></div></div></div>
       <section class="hoja" id="zona-grafico" hidden>
         <div class="hoja-cabeza"><h2>Gráfico</h2></div>
-        <div class="hoja-cuerpo"><div style="height:240px"><canvas id="grafico" aria-label="Gráfico del panel" role="img"></canvas></div></div>
+        <div class="hoja-cuerpo"><div style="height:240px" role="img" aria-label="Gráfico del panel"><canvas id="grafico"></canvas></div></div>
       </section>
     </div>
   </div>
@@ -56,6 +56,6 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" integrity="sha384-9nhczxUqK87bcKHh20fSQcTGD4qq5GhayNYSYWqwBkINBhOfQLg/P5HG5lF1urn4" crossorigin="anonymous"></script>
 <script src="{% static 'js/dashboard.js' %}"></script>
 {% endblock %}

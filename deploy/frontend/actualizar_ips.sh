@@ -16,10 +16,10 @@ APP_DIR="/home/ubuntu/BuildCorp"
 CONF_DIR="/etc/buildcorp"
 DIR_SCRIPT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-[ "$(id -u)" -eq 0 ] || { echo "Ejecuta con sudo"; exit 1; }
+[[ "$(id -u)" -eq 0 ]] || { echo "Ejecuta con sudo"; exit 1; }
 
 NUEVO_FRONTEND="" NUEVO_API_HOST="" NUEVA_API_URL=""
-while [ $# -gt 0 ]; do
+while [[ $# -gt 0 ]]; do
   case "$1" in
     --frontend) NUEVO_FRONTEND="${2:?falta valor}"; shift 2 ;;
     --api-host) NUEVO_API_HOST="${2:?falta valor}"; shift 2 ;;
@@ -36,20 +36,20 @@ imds() {
 }
 IP_PUBLICA=$(imds public-ipv4)
 DNS_PUBLICO=$(imds public-hostname)
-[ -n "$IP_PUBLICA" ] || { echo "No pude leer la IP pública de los metadatos de la EC2"; exit 1; }
+[[ -n "$IP_PUBLICA" ]] || { echo "No pude leer la IP pública de los metadatos de la EC2"; exit 1; }
 
-if [ -f "$CONF_DIR/backend.conf" ]; then
+if [[ -f "$CONF_DIR/backend.conf" ]]; then
   # ------------------------------- BACKEND -------------------------------
   # shellcheck disable=SC1091
   source "$CONF_DIR/backend.conf"
-  [ -n "$NUEVO_FRONTEND" ] && FRONTEND_ORIGIN="${NUEVO_FRONTEND%/}"
-  if [ -n "$NUEVO_API_HOST" ]; then
+  [[ -n "$NUEVO_FRONTEND" ]] && FRONTEND_ORIGIN="${NUEVO_FRONTEND%/}"
+  if [[ -n "$NUEVO_API_HOST" ]]; then
     API_GATEWAY_HOST="${NUEVO_API_HOST#https://}"; API_GATEWAY_HOST="${API_GATEWAY_HOST%%/*}"
   fi
   [[ "$FRONTEND_ORIGIN" =~ ^https?://[^/]+$ ]] || { echo "Origen de frontend inválido: $FRONTEND_ORIGIN"; exit 1; }
 
   ENV_FILE="$APP_DIR/.env"
-  [ -f "$ENV_FILE" ] || { echo "No existe $ENV_FILE: corre primero deploy/backend/setup_backend.sh"; exit 1; }
+  [[ -f "$ENV_FILE" ]] || { echo "No existe $ENV_FILE: corre primero deploy/backend/setup_backend.sh"; exit 1; }
   set_env() {
     local clave="$1" valor="$2" tmp
     tmp=$(mktemp)
@@ -58,9 +58,9 @@ if [ -f "$CONF_DIR/backend.conf" ]; then
     cat "$tmp" > "$ENV_FILE"; rm -f "$tmp"
   }
   HOSTS="${IP_PUBLICA},${API_GATEWAY_HOST},localhost,127.0.0.1"
-  [ -n "$DNS_PUBLICO" ] && HOSTS="${DNS_PUBLICO},${HOSTS}"
+  [[ -n "$DNS_PUBLICO" ]] && HOSTS="${DNS_PUBLICO},${HOSTS}"
   CSRF="https://${API_GATEWAY_HOST},http://${IP_PUBLICA},${FRONTEND_ORIGIN}"
-  [ -n "$DNS_PUBLICO" ] && CSRF="${CSRF},http://${DNS_PUBLICO}"
+  [[ -n "$DNS_PUBLICO" ]] && CSRF="${CSRF},http://${DNS_PUBLICO}"
   set_env ALLOWED_HOSTS "$HOSTS"
   set_env CSRF_TRUSTED_ORIGINS "$CSRF"
   set_env CORS_ALLOWED_ORIGINS "$FRONTEND_ORIGIN"
@@ -78,19 +78,22 @@ EOF
   echo "Pendiente en la consola: API Gateway → Integrations → cambiar la URL a"
   echo "  http://${DNS_PUBLICO:-$IP_PUBLICA}/api/{proxy}"
 
-elif [ -f "$CONF_DIR/frontend.conf" ]; then
+elif [[ -f "$CONF_DIR/frontend.conf" ]]; then
   # ------------------------------- FRONTEND ------------------------------
   # shellcheck disable=SC1091
   source "$CONF_DIR/frontend.conf"
-  if [ -n "$NUEVA_API_URL" ] && [ "${NUEVA_API_URL%/}" != "$VITE_API_URL" ]; then
+  if [[ -n "$NUEVA_API_URL" ]] && [[ "${NUEVA_API_URL%/}" != "$VITE_API_URL" ]]; then
     echo "La URL de API Gateway cambió: reconstruyendo el frontend"
     bash "$DIR_SCRIPT/setup_frontend.sh" "$NUEVA_API_URL" "${S3_REGION:-us-east-1}"
   else
     echo "El frontend no depende de su propia IP (Nginx usa server_name _): no hay que reconstruir."
   fi
-  echo "IP nueva del frontend: http://${IP_PUBLICA}/"
+  # Con HTTPS (certbot) el origen es el dominio; un dominio sslip.io lleva la IP en el nombre,
+  # así que si la IP cambió hay que volver a correr setup_frontend.sh con el dominio nuevo.
+  if [[ -n "${DOMINIO:-}" ]]; then ORIGEN="https://${DOMINIO}"; else ORIGEN="http://${IP_PUBLICA}"; fi
+  echo "IP nueva del frontend: ${IP_PUBLICA} · origen ${ORIGEN}"
   echo "Pendiente en la EC2 backend:"
-  echo "  sudo bash deploy/frontend/actualizar_ips.sh --frontend http://${IP_PUBLICA}"
+  echo "  sudo bash deploy/frontend/actualizar_ips.sh --frontend ${ORIGEN}"
 else
   echo "Esta EC2 no tiene $CONF_DIR/backend.conf ni frontend.conf: corre antes setup_backend.sh o setup_frontend.sh"
   exit 1

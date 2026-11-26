@@ -28,7 +28,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     if (!tokens.getRefresh()) return;
     let vigente = true;
-    (async () => {
+    void (async () => {
       try {
         if (await renovarAccess()) {
           const yo = await api.get("/auth/me/");

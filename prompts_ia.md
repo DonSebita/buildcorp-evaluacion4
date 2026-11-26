@@ -458,3 +458,18 @@ Este archivo registra las consultas y la ayuda pedida a herramientas de IA duran
 **Archivos:** `apps/usuarios/api.py`, `apps/usuarios/api_urls.py`, `apps/usuarios/serializers.py`, `apps/usuarios/roles.py`, `apps/usuarios/tests/test_gestion.py` (creado), `apps/prestamos/api.py`, `apps/prestamos/api_urls.py`, `apps/prestamos/serializers.py`, `apps/activos/api.py`, `buildcorp/urls.py`, `frontend/src/App.jsx`, `frontend/src/auth/roles.js`, `frontend/src/pages/dashboard/enlaces.js`, `frontend/src/pages/{usuarios,parametros,alertas,cobros,categorias}/` (creados), `PLANIFICACION.md`, `README.md` (modificados)
 
 ---
+
+### #35 · 2026-11-26 · Corrección de hallazgos SonarQube y OWASP ZAP (antes → después)
+
+**Prompt:**
+> Corregir los hallazgos del análisis SAST (SonarQube Cloud: Quality Gate fallido, Security C, Reliability C) y DAST (ZAP API autenticada) para las evidencias "después"; ¿cómo paso los datos de SonarQube?
+
+**Apoyo de la IA:**
+- Leyó los 86 issues de SonarQube Cloud por la API (token de solo lectura) y el reporte ZAP E19.
+- SonarQube: `[[ ]]` en los scripts bash, `curl --proto =https`, SRI (`integrity` + `crossorigin`) en los recursos de jsdelivr, clave demo y nombre del campo `password` fuera de literales, IP de documentación (RFC 5737) en la demo, `<th>` en tablas de desglose, regex sin backtracking, promesa marcada con `void`, sin `autofocus`, constante `ESTADOS_EN_TERRENO`.
+- ZAP: middleware con CSP, HSTS y `Cache-Control: no-store` en `/api/` (incluye el preflight OPTIONS); paginación estricta (`page=3-2` → 400; era un falso positivo de inyección SQL); Nginx del frontend con HSTS, CSP sin `'unsafe-inline'` y HTML sin caché; HTTPS con certbot reproducible en `setup_frontend.sh`.
+- 6 pruebas nuevas (80 en total, todas en verde).
+
+**Archivos:** `buildcorp/middleware.py`, `buildcorp/tests/test_seguridad_zap.py`, `frontend/src/utils/texto.js` (creados); `buildcorp/settings/base.py`, `buildcorp/urls.py`, `apps/usuarios/paginacion.py`, `apps/usuarios/serializers.py`, `apps/usuarios/context_processors.py`, `apps/usuarios/management/commands/cargar_demo.py`, `apps/prestamos/models.py`, `apps/prestamos/services.py`, `apps/dashboard/services.py`, templates Django, `frontend/src/{api/client.js,auth/AuthContext.jsx,pages/Login.jsx,pages/dashboard/enlaces.js}`, `deploy/**/*.sh`, `deploy/frontend/nginx_frontend.conf`, `deploy/frontend/README.md` (modificados)
+
+---

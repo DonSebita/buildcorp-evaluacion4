@@ -66,6 +66,7 @@
       <div class="hoja-cabeza"><h2>Cobro estimado a hoy</h2><span class="small text-secondary">{{ estimado.dias }} día{{ estimado.dias|pluralize }}</span></div>
       <div class="hoja-cuerpo">
         <table class="desglose">
+          <thead class="visually-hidden"><tr><th scope="col">Concepto</th><th scope="col">Monto</th></tr></thead>
           <tr><td>Arriendo</td><td>{{ estimado.arriendo|clp }}</td></tr>
           {% if estimado.atraso %}<tr><td>Recargo por {{ estimado.dias_atraso }} día{{ estimado.dias_atraso|pluralize }} de atraso</td><td style="color:var(--crit)">{{ estimado.atraso|clp }}</td></tr>{% endif %}
           <tr class="sub"><td>IVA</td><td>{{ estimado.iva|clp }}</td></tr>

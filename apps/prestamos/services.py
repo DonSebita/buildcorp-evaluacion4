@@ -321,7 +321,7 @@ def revisar_morosidad(hoy=None):
     gracia = ParametroSistema.actual().dias_gracia
     resumen = {"atrasados": 0, "bloqueados": 0}
     vencidos = Prestamo.objects.filter(
-        estado__in=Prestamo.EN_TERRENO, fecha_devolucion_pactada__lt=hoy
+        estado__in=Prestamo.ESTADOS_EN_TERRENO, fecha_devolucion_pactada__lt=hoy
     ).select_related("contratista")
     for p in vencidos:
         with transaction.atomic():

@@ -21,14 +21,14 @@ cd "$APP_DIR"
 como_app() { sudo -u "$USUARIO" -H "$@"; }
 log() { echo "$(date '+%F %T') [front] $*" | tee -a "$LOG"; }
 
-[ -f "$CONF" ] || { log "ERROR: falta $CONF (corre antes setup_frontend.sh)"; exit 1; }
+[[ -f "$CONF" ]] || { log "ERROR: falta $CONF (corre antes setup_frontend.sh)"; exit 1; }
 VITE_API_URL=$(grep '^VITE_API_URL=' "$CONF" | cut -d= -f2-)
-[ -n "$VITE_API_URL" ] || { log "ERROR: $CONF no tiene VITE_API_URL"; exit 1; }
+[[ -n "$VITE_API_URL" ]] || { log "ERROR: $CONF no tiene VITE_API_URL"; exit 1; }
 
 como_app git fetch -q origin "$RAMA"
 ACTUAL=$(como_app git rev-parse HEAD)
 NUEVO=$(como_app git rev-parse "origin/$RAMA")
-[ "$ACTUAL" = "$NUEVO" ] && [ "${1:-}" != "--forzar" ] && exit 0
+[[ "$ACTUAL" = "$NUEVO" ]] && [[ "${1:-}" != "--forzar" ]] && exit 0
 
 trap 'log "ERROR: el despliegue de ${NUEVO:0:7} falló (revisa journalctl -u buildcorp-actualizar-front)"' ERR
 
@@ -36,18 +36,18 @@ CAMBIADOS=$(como_app git diff --name-only "$ACTUAL" "$NUEVO")
 como_app git merge -q --ff-only "origin/$RAMA"
 
 # Solo reconstruir si cambió algo del frontend
-if [ "${1:-}" != "--forzar" ] && ! grep -q '^frontend/' <<<"$CAMBIADOS"; then
+if [[ "${1:-}" != "--forzar" ]] && ! grep -q '^frontend/' <<<"$CAMBIADOS"; then
   log "${NUEVO:0:7}: sin cambios en frontend/, no se reconstruye"
   exit 0
 fi
 
 log "Desplegando ${ACTUAL:0:7} -> ${NUEVO:0:7}: $(como_app git log -1 --format=%s "$NUEVO")"
 cd "$FRONT_DIR"
-if [ ! -d node_modules ] || grep -qE '^frontend/package(-lock)?\.json$' <<<"$CAMBIADOS"; then
+if [[ ! -d node_modules ]] || grep -qE '^frontend/package(-lock)?\.json$' <<<"$CAMBIADOS"; then
   como_app npm ci --no-audit --no-fund
 fi
 como_app env VITE_API_URL="$VITE_API_URL" npm run build
-[ -f dist/index.html ] || { log "ERROR: el build no generó dist/index.html"; exit 1; }
+[[ -f dist/index.html ]] || { log "ERROR: el build no generó dist/index.html"; exit 1; }
 
 rsync -a --delete dist/ "$WEB_DIR"/
 chown -R root:www-data "$WEB_DIR"

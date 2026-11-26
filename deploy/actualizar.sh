@@ -21,7 +21,7 @@ log() { echo "$(date '+%F %T') $*" | tee -a "$LOG"; }
 como_app git fetch -q origin "$RAMA"
 ACTUAL=$(como_app git rev-parse HEAD)
 NUEVO=$(como_app git rev-parse "origin/$RAMA")
-[ "$ACTUAL" = "$NUEVO" ] && exit 0
+[[ "$ACTUAL" = "$NUEVO" ]] && exit 0
 
 trap 'log "ERROR: el despliegue de ${NUEVO:0:7} falló (revisa journalctl -u buildcorp-actualizar)"' ERR
 

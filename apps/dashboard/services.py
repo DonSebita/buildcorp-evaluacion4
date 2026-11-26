@@ -164,7 +164,7 @@ def resumen(usuario):
     elif rol == ENCARGADO:
         por_entregar = Prestamo.objects.filter(estado=P.BORRADOR).select_related("contratista", "obra").order_by("fecha_entrega")
         esperadas = Prestamo.objects.filter(
-            estado__in=Prestamo.EN_TERRENO, fecha_devolucion_pactada__lte=hoy + timedelta(days=2)
+            estado__in=Prestamo.ESTADOS_EN_TERRENO, fecha_devolucion_pactada__lte=hoy + timedelta(days=2)
         ).select_related("contratista", "obra").order_by("fecha_devolucion_pactada")
         danos_mes = DetallePrestamo.objects.filter(
             prestamo__fecha_devolucion_real__gte=hoy.replace(day=1),
@@ -188,7 +188,7 @@ def resumen(usuario):
         ]
 
     elif rol == VENTAS:
-        en_terreno = Prestamo.objects.filter(estado__in=Prestamo.EN_TERRENO)
+        en_terreno = Prestamo.objects.filter(estado__in=Prestamo.ESTADOS_EN_TERRENO)
         pendientes, total_pend = cobros_pendientes()
         vencen = en_terreno.filter(fecha_devolucion_pactada__lte=hoy + timedelta(days=7)).select_related(
             "contratista", "obra").order_by("fecha_devolucion_pactada")

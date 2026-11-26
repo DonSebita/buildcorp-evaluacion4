@@ -47,6 +47,7 @@
       <div class="hoja-cabeza"><h2>Cobro estimado</h2><span class="small text-secondary">{{ estimado.dias }} día{{ estimado.dias|pluralize }}</span></div>
       <div class="hoja-cuerpo">
         <table class="desglose">
+          <thead class="visually-hidden"><tr><th scope="col">Concepto</th><th scope="col">Monto</th></tr></thead>
           <tr><td>Arriendo</td><td>{{ estimado.arriendo|clp }}</td></tr>
           {% if estimado.atraso %}<tr><td>Recargo {{ estimado.dias_atraso }} día{{ estimado.dias_atraso|pluralize }} de atraso</td><td style="color:var(--crit)">{{ estimado.atraso|clp }}</td></tr>{% endif %}
           <tr><td>Daños</td><td id="danos">$0</td></tr>
@@ -59,7 +60,7 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.2.0/dist/signature_pad.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.2.0/dist/signature_pad.umd.min.js" integrity="sha384-vhxlvgHDsZyM5pkkE2Mx3bO5MpatBRz+YNdhWekhSLp0pupx0PoA4MgT+IZODSgi" crossorigin="anonymous"></script>
 <script src="{% static 'js/firma.js' %}"></script>
 <script>
 (function () {

@@ -23,6 +23,9 @@ from apps.usuarios.models import Usuario
 from apps.usuarios.roles import ADMIN, BODEGUERO, ENCARGADO, VENTAS
 
 CLAVE_DEMO = "buildcorp2026"
+# IP registrada en las firmas de la demo: rango de documentación RFC 5737 (TEST-NET-1),
+# no corresponde a ningún equipo real.
+IP_DEMO = "192.0.2.15"
 
 CATEGORIAS = [
     # nombre, prefijo, diaria, mensual, horómetro, usos, horas, días, cantidad, marcas
@@ -200,7 +203,7 @@ class Command(BaseCommand):
             for d in p.detalles.select_related("activo__categoria")
         }
         prest_srv.entregar(p, self.u["encargado"], checklist,
-                           {"nombre": obra.responsable_nombre, "rut": obra.responsable_rut, "imagen": firma_png(p.pk % 5)}, "10.0.0.15")
+                           {"nombre": obra.responsable_nombre, "rut": obra.responsable_rut, "imagen": firma_png(p.pk % 5)}, IP_DEMO)
         Prestamo.objects.filter(pk=p.pk).update(fecha_entrega=f_salida)
         HistorialEstado.objects.filter(referencia=p.codigo, estado_nuevo="EN_USO").update(fecha=self.momento(-salida, 9))
         Firma.objects.filter(prestamo=p, tipo="ENTREGA").update(fecha=self.momento(-salida, 9))
@@ -218,7 +221,7 @@ class Command(BaseCommand):
         p.refresh_from_db()
         prest_srv.devolver(p, self.u["encargado"], recepcion,
                            {"nombre": obra.responsable_nombre, "rut": obra.responsable_rut, "imagen": firma_png(p.pk % 5 + 1)},
-                           "10.0.0.15", fecha=self.hoy + timedelta(days=vuelta))
+                           IP_DEMO, fecha=self.hoy + timedelta(days=vuelta))
         HistorialEstado.objects.filter(referencia=p.codigo).exclude(estado_nuevo="EN_USO").update(fecha=self.momento(-vuelta, 17))
         Firma.objects.filter(prestamo=p, tipo="DEVOLUCION").update(fecha=self.momento(-vuelta, 17))
         if pagar:

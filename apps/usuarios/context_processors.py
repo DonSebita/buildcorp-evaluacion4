@@ -16,6 +16,10 @@ def rol(request):
         "alertas_abiertas": 0,
         "mostrar_credenciales_demo": settings.MOSTRAR_CREDENCIALES_DEMO,
     }
+    if settings.MOSTRAR_CREDENCIALES_DEMO:
+        from .management.commands.cargar_demo import CLAVE_DEMO
+
+        datos["clave_demo"] = CLAVE_DEMO
     if actual:
         from apps.alertas.services import alertas_para
 

@@ -37,7 +37,7 @@ class Prestamo(models.Model):
         DEVUELTO = "DEVUELTO", "Devuelto"
         CERRADO = "CERRADO", "Cerrado"
 
-    EN_TERRENO = (Estado.ENTREGADO, Estado.ATRASADO)
+    ESTADOS_EN_TERRENO = (Estado.ENTREGADO, Estado.ATRASADO)
 
     codigo = models.CharField("folio", max_length=14, unique=True, editable=False)
     contratista = models.ForeignKey("contratistas.Contratista", on_delete=models.PROTECT, related_name="prestamos")
@@ -68,7 +68,7 @@ class Prestamo(models.Model):
 
     @property
     def en_terreno(self):
-        return self.estado in self.EN_TERRENO
+        return self.estado in self.ESTADOS_EN_TERRENO
 
 
 class PrestamoPaquete(models.Model):

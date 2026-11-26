@@ -39,6 +39,14 @@ class UsuarioActualSerializer(serializers.Serializer):
 
 # ---------------------------------------------------------------- gestión de trabajadores (Administrador)
 
+# Nombre del campo de la clave en la API. Los errores de validación se asocian a ese
+# campo con _error_clave(); el texto del error nunca es una credencial.
+CAMPO_CLAVE = "password"
+
+
+def _error_clave(mensaje):
+    return serializers.ValidationError({CAMPO_CLAVE: mensaje})
+
 class UsuarioSerializer(serializers.ModelSerializer):
     """Trabajador del sistema. El rol se guarda como Grupo de Django (uno solo por usuario).
 
@@ -82,16 +90,17 @@ class UsuarioSerializer(serializers.ModelSerializer):
         return valor
 
     def validate(self, datos):
-        if self.instance is None and not datos.get("password"):
-            raise serializers.ValidationError({"password": "Define una clave inicial para el trabajador."})
-        if self.instance is not None and "password" in datos:
-            raise serializers.ValidationError({"password": "Para cambiar la clave usa «Restablecer clave»."})
-        if datos.get("password"):
-            candidato = Usuario(**{k: v for k, v in datos.items() if k not in ("rol", "password")})
+        clave = datos.get(CAMPO_CLAVE)
+        if self.instance is None and not clave:
+            raise _error_clave("Define una clave inicial para el trabajador.")
+        if self.instance is not None and CAMPO_CLAVE in datos:
+            raise _error_clave("Para cambiar la clave usa «Restablecer clave».")
+        if clave:
+            candidato = Usuario(**{k: v for k, v in datos.items() if k not in ("rol", CAMPO_CLAVE)})
             try:
-                validate_password(datos["password"], candidato)
+                validate_password(clave, candidato)
             except DjangoValidationError as e:
-                raise serializers.ValidationError({"password": list(e.messages)}) from e
+                raise _error_clave(list(e.messages)) from e
 
         solicitante = self.context["request"].user
         if self.instance is not None and self.instance.pk == solicitante.pk:

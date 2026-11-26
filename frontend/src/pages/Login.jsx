@@ -57,7 +57,7 @@ export default function Login() {
               <label className="etiqueta" htmlFor="usuario">
                 Usuario
               </label>
-              <input id="usuario" className="campo" autoComplete="username" autoFocus value={username} onChange={(e) => setUsername(e.target.value)} disabled={enviando} required />
+              <input id="usuario" className="campo" autoComplete="username" value={username} onChange={(e) => setUsername(e.target.value)} disabled={enviando} required />
             </div>
             <div>
               <label className="etiqueta" htmlFor="clave">
