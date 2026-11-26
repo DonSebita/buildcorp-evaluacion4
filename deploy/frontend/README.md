@@ -37,14 +37,23 @@ En una t2.micro (1 GB de RAM) el script crea un swap de 1 GB para que el build d
 ## Content-Security-Policy
 
 ```
-default-src 'self'; script-src 'self';
-style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;
+default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self';
 img-src 'self' data: blob: https://*.s3.amazonaws.com https://*.s3.<región>.amazonaws.com;
 connect-src 'self' https://xxxx.execute-api.us-east-1.amazonaws.com;
 object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
 ```
 
-`connect-src` limita `fetch` a la página y a API Gateway; si alguien inyecta un script, no puede enviar datos a otro servidor. `'unsafe-inline'` solo está en `style-src` por los atributos `style` de React; los scripts no lo tienen. Las fuentes de Google se permiten porque `DESIGN.md` usa la tipografía Archivo.
+`connect-src` limita `fetch` a la página y a API Gateway; si alguien inyecta un script, no puede enviar datos a otro servidor. Ni scripts ni estilos aceptan `'unsafe-inline'` (hallazgo de OWASP ZAP corregido en la Evaluación 4): la tipografía Archivo viene empaquetada en el build con `@fontsource`, y la prop `style` de React se aplica por CSSOM, que la CSP no bloquea.
+
+Además se envían `Strict-Transport-Security` (HSTS, 1 año) y, para el HTML, `Cache-Control: no-cache, no-store, must-revalidate`.
+
+## HTTPS
+
+Con un tercer parámetro, `setup_frontend.sh` obtiene un certificado de Let's Encrypt con `certbot --nginx` y deja la redirección 80 → 443. Con la IP pública basta un nombre de sslip.io:
+
+```bash
+sudo bash deploy/frontend/setup_frontend.sh https://xxxx.execute-api.us-east-1.amazonaws.com/api/v1 us-east-1 buildcorp.<ip-con-guiones>.sslip.io
+```
 
 Comprobar: `curl -I http://<IP_FRONTEND>/` debe mostrar las cabeceras y **no** la versión de Nginx (`Server: nginx`).
 

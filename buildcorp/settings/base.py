@@ -44,6 +44,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    # Cabeceras de seguridad de /api/ (CSP, HSTS, no-store). Primero, para cubrir
+    # también el preflight OPTIONS que responde CorsMiddleware.
+    "buildcorp.middleware.CabecerasSeguridadAPI",
     # CorsMiddleware va lo más arriba posible (antes de CommonMiddleware) para
     # responder también las peticiones OPTIONS (preflight) del frontend Vite.
     "corsheaders.middleware.CorsMiddleware",
