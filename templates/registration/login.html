@@ -1,0 +1,90 @@
+{% load static %}<!doctype html>
+<html lang="es-CL">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2e2a6e">
+  <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">
+  <title>Iniciar sesión · BuildCorp</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="{% static 'css/buildcorp.css' %}" rel="stylesheet">
+</head>
+<body>
+<div class="login">
+  <section class="login-lado">
+    <span class="marca">Build<b>Corp</b></span>
+    <h2>Control de arriendos, bodegas y mantenciones.</h2>
+    <div>
+      <p class="mb-2">Cada rol trabaja en su copia:</p>
+      <div class="login-copias">
+        <span style="background:#fff;color:#2e2a6e">Administración</span>
+        <span style="background:#f4e4a1;color:#463d0c">Ventas</span>
+        <span style="background:#f6d9df;color:#5a1f2d">Bodega</span>
+        <span style="background:#d5e5f2;color:#1b3850">Entrega y recepción</span>
+      </div>
+    </div>
+  </section>
+  <main class="login-form">
+    <div style="max-width:360px;width:100%;margin:0 auto">
+      <div class="d-flex align-items-center justify-content-between gap-2">
+        <h1 class="mb-0">Iniciar sesión</h1>
+        {% if mostrar_credenciales_demo %}
+        <button type="button" class="ayuda-demo" id="btn-demo" aria-expanded="false" aria-controls="panel-demo" title="Credenciales de prueba">?</button>
+        {% endif %}
+      </div>
+      <p class="text-secondary mb-4 mt-2">Uso exclusivo del personal de BuildCorp.</p>
+      {% if mostrar_credenciales_demo %}
+      <div class="panel-demo mb-3" id="panel-demo" hidden>
+        <p class="mb-2"><b>Credenciales de prueba</b> · contraseña <code>buildcorp2026</code></p>
+        <p class="small text-secondary mb-2">Haz clic en un usuario para rellenar el formulario.</p>
+        <div class="d-grid gap-1">
+          <button type="button" class="btn btn-sm btn-outline-secondary text-start" data-usuario="admin">admin · Administrador</button>
+          <button type="button" class="btn btn-sm btn-outline-secondary text-start" data-usuario="bodeguero">bodeguero · Bodeguero</button>
+          <button type="button" class="btn btn-sm btn-outline-secondary text-start" data-usuario="encargado">encargado · Entrega y recepción</button>
+          <button type="button" class="btn btn-sm btn-outline-secondary text-start" data-usuario="ventas">ventas · Ventas</button>
+        </div>
+      </div>
+      {% endif %}
+      {% if form.errors %}
+      <div class="aviso error mb-3" role="alert">Usuario o contraseña incorrectos. Revisa mayúsculas y vuelve a intentar.</div>
+      {% endif %}
+      <form method="post" novalidate>
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        <div class="mb-3">
+          <label class="form-label" for="id_username">Usuario</label>
+          <input class="form-control" type="text" name="username" id="id_username" autocomplete="username" autocapitalize="none" value="{{ form.username.value|default:'' }}" required autofocus>
+        </div>
+        <div class="mb-4">
+          <label class="form-label" for="id_password">Contraseña</label>
+          <input class="form-control" type="password" name="password" id="id_password" autocomplete="current-password" required>
+        </div>
+        <button class="btn btn-primary btn-lg w-100" type="submit">Entrar</button>
+      </form>
+    </div>
+  </main>
+</div>
+{% if mostrar_credenciales_demo %}
+<script>
+  (function () {
+    var btn = document.getElementById("btn-demo");
+    var panel = document.getElementById("panel-demo");
+    btn.addEventListener("click", function () {
+      panel.hidden = !panel.hidden;
+      btn.setAttribute("aria-expanded", String(!panel.hidden));
+    });
+    panel.querySelectorAll("[data-usuario]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        document.getElementById("id_username").value = b.dataset.usuario;
+        document.getElementById("id_password").value = "buildcorp2026";
+        document.querySelector("form button[type=submit]").focus();
+      });
+    });
+  })();
+</script>
+{% endif %}
+</body>
+</html>

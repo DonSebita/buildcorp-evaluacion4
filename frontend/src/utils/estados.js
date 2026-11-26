@@ -1,0 +1,22 @@
+/** Estado del backend → variante de timbre (portado de BC.timbre en static/js/api.js). */
+export const CLASES_ESTADO = {
+  DISPONIBLE: "ok",
+  EN_USO: "uso",
+  MANTENIMIENTO: "warn",
+  DADO_DE_BAJA: "baja",
+  BORRADOR: "info",
+  ENTREGADO: "uso",
+  ATRASADO: "crit",
+  DEVUELTO: "ok",
+  CERRADO: "cerrado",
+  ACTIVO: "ok",
+  BLOQUEADO: "crit",
+  PENDIENTE: "warn",
+  PAGADO: "ok",
+  VENCIDO: "crit",
+  PROXIMO: "warn",
+  AL_DIA: "ok",
+  CRITICO: "crit",
+  WARNING: "warn",
+  INFO: "info",
+};

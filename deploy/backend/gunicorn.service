@@ -1,0 +1,20 @@
+# Servicio systemd de la EC2 backend. Se instala como /etc/systemd/system/buildcorp.service
+# (mismo nombre que en la versión de una sola EC2, así deploy/actualizar.sh sigue funcionando).
+[Unit]
+Description=BuildCorp backend (Gunicorn + Django REST Framework)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/BuildCorp
+Environment=DJANGO_SETTINGS_MODULE=buildcorp.settings.prod
+ExecStart=/home/ubuntu/BuildCorp/.venv/bin/gunicorn buildcorp.wsgi:application --workers 3 --bind 127.0.0.1:8000 --timeout 60 --access-logfile - --error-logfile -
+Restart=on-failure
+# Endurecimiento básico
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

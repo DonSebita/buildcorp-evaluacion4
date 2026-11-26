@@ -1,0 +1,21 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+db.sqlite3
+media/
+staticfiles/
+.impeccable/mocks/
+.impeccable/review/
+
+# Frontend (Vite)
+node_modules/
+frontend/dist/
+
+# Secretos: nunca al repositorio
+.env.*
+!.env.example
+*.pem
+*.key
+X-Origin-Verify*
+rds.env

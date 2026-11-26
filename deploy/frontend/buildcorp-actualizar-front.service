@@ -1,0 +1,8 @@
+[Unit]
+Description=BuildCorp frontend: despliegue automático desde GitHub
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /home/ubuntu/BuildCorp/deploy/frontend/actualizar_frontend.sh

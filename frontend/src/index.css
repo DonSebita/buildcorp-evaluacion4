@@ -1,0 +1,178 @@
+/* BuildCorp · sistema visual «Talonario de arriendo» (ver DESIGN.md en la raíz).
+   Los tokens se exponen a Tailwind con @theme: bg-tinta, text-folio, border-linea, etc.
+   Las piezas propias del sistema (timbres, hojas, botones, campos) viven en @layer components
+   para que todas las pantallas se vean como el mismo producto. */
+@import "@fontsource-variable/archivo/standard.css";
+@import "bootstrap-icons/font/bootstrap-icons.css";
+@import "tailwindcss";
+
+@theme {
+  --color-tinta: #2e2a6e;
+  --color-tinta-hover: #24205a;
+  --color-tinta-suave: #ebeaf5;
+  --color-papel: #f3f3f7;
+  --color-superficie: #ffffff;
+  --color-linea: #dddbe8;
+  --color-linea-suave: #ecebf2;
+  --color-texto: #1d1b3a;
+  --color-texto-2: #57547a;
+  --color-folio: #c8102e;
+
+  --color-ok: #2d6a3e;
+  --color-ok-fondo: #e4f0e7;
+  --color-warn: #7f5a00;
+  --color-warn-fondo: #fbf0cc;
+  --color-crit: #c8102e;
+  --color-crit-fondo: #fce8ec;
+  --color-info: #2e2a6e;
+  --color-info-fondo: #ebeaf5;
+  --color-baja: #6a6882;
+
+  --font-sans: "Archivo Variable", "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --radius-hoja: 10px;
+}
+
+/* Copia del talonario por rol: color del ítem activo del riel y de la franja del dashboard. */
+:root { --copia: #ffffff; --copia-texto: var(--color-tinta); --copia-linea: var(--color-linea); }
+[data-rol="ventas"]  { --copia: #f4e4a1; --copia-texto: #463d0c; --copia-linea: #e0cb72; }
+[data-rol="bodega"]  { --copia: #f6d9df; --copia-texto: #5a1f2d; --copia-linea: #e6b5c0; }
+[data-rol="terreno"] { --copia: #d5e5f2; --copia-texto: #1b3850; --copia-linea: #a9c7df; }
+[data-rol="admin"]   { --copia: #ffffff; --copia-texto: var(--color-tinta); --copia-linea: var(--color-linea); }
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--color-papel);
+    color: var(--color-texto);
+    font-size: 0.975rem;
+    caret-color: var(--color-tinta);
+  }
+  ::selection { background: #f4e4a1; color: var(--color-texto); }
+  a { color: var(--color-tinta); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  a:hover { color: var(--color-folio); }
+  :focus-visible { outline: 2px solid var(--color-tinta); outline-offset: 2px; border-radius: 4px; }
+  h1, h2, h3 { text-wrap: balance; letter-spacing: -0.015em; }
+  button:not(:disabled), [role="button"]:not(:disabled) { cursor: pointer; }
+}
+
+@layer components {
+  /* ---------- hojas (paneles) ---------- */
+  .hoja { background: var(--color-superficie); border: 1px solid var(--color-linea); border-radius: var(--radius-hoja); }
+  .hoja-cabeza {
+    display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
+    padding: 0.85rem 1.15rem; border-bottom: 1px solid var(--color-linea-suave);
+  }
+  .hoja-cabeza h2 { font-size: 1.02rem; font-weight: 700; margin: 0; }
+  .hoja-cuerpo { padding: 1.15rem; }
+
+  .folio { color: var(--color-folio); font-weight: 700; font-stretch: 92%; letter-spacing: 0.01em; text-decoration: none; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* ---------- timbres de estado (siempre con texto) ---------- */
+  .timbre {
+    display: inline-block; border: 1.5px solid currentColor; border-radius: 4px;
+    padding: 0.05rem 0.45rem; font-size: 0.72rem; font-weight: 750; line-height: 1.5;
+    letter-spacing: 0.06em; text-transform: uppercase; font-stretch: 90%; white-space: nowrap;
+  }
+  .timbre-ok   { color: var(--color-ok); }
+  .timbre-uso  { color: var(--color-info); }
+  .timbre-info { color: var(--color-info); background: var(--color-info-fondo); }
+  .timbre-warn { color: var(--color-warn); background: var(--color-warn-fondo); }
+  .timbre-crit { color: var(--color-crit); background: var(--color-crit-fondo); }
+  .timbre-baja { color: var(--color-baja); text-decoration: line-through; text-decoration-thickness: 1.5px; }
+  .timbre-cerrado { color: var(--color-baja); }
+  .timbre-lg { font-size: 0.95rem; padding: 0.15rem 0.7rem; border-width: 2px; }
+  .timbre-nuevo { animation: timbrar 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+  /* ---------- botones (objetivo táctil ≥ 44 px) ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem;
+    min-height: 44px; padding: 0.5rem 1rem; border-radius: 8px; border: 1px solid transparent;
+    font-weight: 650; font-size: 0.925rem; line-height: 1.2; text-decoration: none; white-space: nowrap;
+    transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .btn:disabled, .btn[aria-busy="true"] { opacity: 0.6; cursor: not-allowed; }
+  .btn-primario { background: var(--color-tinta); color: #fff; }
+  .btn-primario:hover:not(:disabled) { background: var(--color-tinta-hover); color: #fff; }
+  .btn-secundario { background: var(--color-superficie); color: var(--color-tinta); border-color: var(--color-linea); }
+  .btn-secundario:hover:not(:disabled) { background: var(--color-tinta-suave); color: var(--color-tinta); }
+  .btn-peligro { background: var(--color-crit); color: #fff; }
+  .btn-peligro:hover:not(:disabled) { background: #a10d25; color: #fff; }
+  .btn-sm { min-height: 36px; padding: 0.3rem 0.7rem; font-size: 0.85rem; }
+
+  /* ---------- campos de formulario ---------- */
+  .etiqueta { display: block; font-weight: 650; font-size: 0.875rem; margin-bottom: 0.3rem; }
+  .campo {
+    display: block; width: 100%; min-height: 44px; padding: 0.5rem 0.75rem;
+    background: var(--color-superficie); color: var(--color-texto);
+    border: 1px solid var(--color-linea); border-radius: 8px; font: inherit;
+  }
+  .campo:focus { outline: 2px solid var(--color-tinta); outline-offset: 0; border-color: var(--color-tinta); }
+  .campo[aria-invalid="true"] { border-color: var(--color-crit); background: #fffafb; }
+  .error-campo { color: var(--color-crit); font-size: 0.825rem; margin-top: 0.3rem; }
+  .ayuda-campo { color: var(--color-texto-2); font-size: 0.825rem; margin-top: 0.3rem; }
+
+  /* ---------- avisos ---------- */
+  .aviso { display: flex; gap: 0.6rem; align-items: flex-start; padding: 0.75rem 1rem; border-radius: 8px; background: var(--color-superficie); border: 1px solid var(--color-linea); }
+  .aviso.success { background: var(--color-ok-fondo); border-color: #bcd9c4; color: #1d4a2a; }
+  .aviso.error { background: var(--color-crit-fondo); border-color: #f2b9c4; color: #7c0a1d; }
+  .aviso.warning { background: var(--color-warn-fondo); border-color: #ead48a; color: #5b4100; }
+  .aviso.info { background: var(--color-info-fondo); border-color: #cfcce6; }
+  .toast-zona .aviso { box-shadow: 0 8px 24px rgba(29, 27, 58, 0.16); animation: subir 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+
+  /* ---------- tablas ---------- */
+  .tabla { width: 100%; border-collapse: collapse; font-size: 0.925rem; }
+  .tabla th {
+    text-align: left; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+    font-stretch: 90%; color: var(--color-texto-2); padding: 0.6rem 1.15rem; border-bottom: 1px solid var(--color-linea);
+    white-space: nowrap;
+  }
+  .tabla td { padding: 0.7rem 1.15rem; border-bottom: 1px solid var(--color-linea-suave); vertical-align: middle; }
+  .tabla tbody tr:last-child td { border-bottom: 0; }
+  .tabla tbody tr.clicable { cursor: pointer; }
+  .tabla tbody tr.clicable:hover { background: #f6f5fb; }
+  .tabla .num { text-align: right; }
+
+  .vacio { padding: 2rem 1.15rem; text-align: center; color: var(--color-texto-2); }
+  .vacio .bi { display: block; font-size: 1.6rem; margin-bottom: 0.35rem; color: #a6a3c0; }
+
+  /* ---------- riel ---------- */
+  .riel-nav a {
+    display: flex; align-items: center; gap: 0.7rem; min-height: 44px; padding: 0.5rem 0.65rem;
+    border-radius: 7px; color: #d4d1ee; text-decoration: none; font-size: 0.925rem;
+  }
+  .riel-nav a .bi { font-size: 1.05rem; opacity: 0.85; }
+  .riel-nav a:hover { background: rgba(255, 255, 255, 0.07); color: #fff; }
+  .riel-nav a.active { background: var(--copia); color: var(--copia-texto); font-weight: 700; }
+  .riel-nav a.active .bi { opacity: 1; }
+  .riel-nav a:focus-visible { outline-color: #f4e4a1; }
+  .riel-seccion {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    color: #8f8bc4; padding: 1rem 0.65rem 0.35rem;
+  }
+}
+
+/* En celular las tablas se apilan como fichas: etiqueta a la izquierda, valor a la derecha. */
+@media (max-width: 575.98px) {
+  .tabla thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .tabla, .tabla tbody, .tabla tr, .tabla td { display: block; width: 100%; }
+  .tabla tbody tr { position: relative; padding: 0.6rem 0; border-bottom: 1px solid var(--color-linea); }
+  .tabla td { display: flex; justify-content: space-between; gap: 1rem; padding: 0.3rem 1rem; border: 0; text-align: right; }
+  .tabla td::before { content: attr(data-label); font-weight: 650; color: var(--color-texto-2); text-align: left; }
+  /* La celda de acciones va como última línea de la ficha (antes era absoluta y tapaba la primera celda). */
+  .tabla td.celda-accion { justify-content: flex-end; flex-wrap: wrap; padding-top: 0.5rem; }
+  .tabla td.celda-accion::before { content: none; }
+}
+
+@keyframes timbrar {
+  from { transform: scale(1.35) rotate(-4deg); opacity: 0; }
+  60% { opacity: 1; }
+  to { transform: scale(1) rotate(0); opacity: 1; }
+}
+@keyframes subir {
+  from { transform: translateY(12px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .timbre-nuevo, .toast-zona .aviso { animation: none; }
+}
