@@ -1,0 +1,12 @@
+# E29 · Conexión SSL activa de Django a RDS  (2026-11-26 13:09 UTC)
+# sslmode=require viene del DATABASE_URL del .env (no se muestran credenciales).
+
+$ ssh -i buildcorp-key.pem ubuntu@54.197.0.230
+ubuntu@backend:~$ cd ~/BuildCorp && DJANGO_SETTINGS_MODULE=buildcorp.settings.prod .venv/bin/python manage.py shell
+>>> connection.settings_dict['OPTIONS']
+{'sslmode': 'require'}
+>>> cursor.execute('SELECT ssl, version, cipher, bits FROM pg_stat_ssl WHERE pid = pg_backend_pid()')
+(True, 'TLSv1.3', 'TLS_AES_256_GCM_SHA384', 256)
+>>> cursor.execute('SELECT version()')
+PostgreSQL 18.3 on x86_64-pc-linux-gnu, compiled by x86_64-p
+

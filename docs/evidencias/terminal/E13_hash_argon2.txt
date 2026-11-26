@@ -1,0 +1,13 @@
+# E13 · Hash Argon2 en la tabla de usuarios (RDS PostgreSQL)  (2026-11-26 13:09 UTC)
+# Hash recortado para no publicarlo completo; se ve algoritmo, parámetros y salt.
+
+$ ssh -i buildcorp-key.pem ubuntu@54.197.0.230
+ubuntu@backend:~$ cd ~/BuildCorp && DJANGO_SETTINGS_MODULE=buildcorp.settings.prod .venv/bin/python manage.py shell
+>>> settings.PASSWORD_HASHERS[0]
+'django.contrib.auth.hashers.Argon2PasswordHasher'
+>>> cursor.execute('SELECT username, password FROM usuarios_usuario ORDER BY id')
+admin      argon2           argon2$argon2id$v=19$m=102400,t=2,p=8$Sml6MURzMnZnUTlEanc1VTk4VWtncQ$H…  (112 caracteres)
+bodeguero  argon2           argon2$argon2id$v=19$m=102400,t=2,p=8$M3AwNWZIN3ZMa2d0MjVaT1hub0JtMg$N…  (112 caracteres)
+encargado  argon2           argon2$argon2id$v=19$m=102400,t=2,p=8$NTFTanJKMFhobE9DUjA2TW45Tk5vTQ$o…  (112 caracteres)
+ventas     argon2           argon2$argon2id$v=19$m=102400,t=2,p=8$eUlOY09KTEMwTzhaa2NPOHdMeFJqVw$u…  (112 caracteres)
+

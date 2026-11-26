@@ -1,0 +1,80 @@
+# E03 · CRUD completo de categorías con códigos HTTP  (2026-11-26 13:04 UTC)
+# Usuario: admin (rol Administrador) · token obtenido con POST $API/auth/token/
+
+## CREATE → 201
+$ curl -X POST $API/categorias/ -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' -d '{"nombre":"Evidencia E03","prefijo_codigo":"EVI","descripcion":"Categoria de prueba CRUD","tarifa_diaria":15000,"tarifa_mensual":300000}'
+HTTP 201
+{
+  "id": 15,
+  "nombre": "Evidencia E03",
+  "prefijo_codigo": "EVI",
+  "descripcion": "Categoria de prueba CRUD",
+  "tarifa_diaria": 15000,
+  "tarifa_mensual": 300000,
+  "requiere_horometro": false,
+  "mant_cada_usos": null,
+  "mant_cada_horas": null,
+  "mant_cada_dias": null,
+  "ultimo_correlativo": 0
+}
+
+## READ → 200
+$ curl $API/categorias/15/ -H "Authorization: Bearer $TOKEN"
+HTTP 200
+{
+  "id": 15,
+  "nombre": "Evidencia E03",
+  "prefijo_codigo": "EVI",
+  "descripcion": "Categoria de prueba CRUD",
+  "tarifa_diaria": 15000,
+  "tarifa_mensual": 300000,
+  "requiere_horometro": false,
+  "mant_cada_usos": null,
+  "mant_cada_horas": null,
+  "mant_cada_dias": null,
+  "ultimo_correlativo": 0
+}
+
+## UPDATE → 200
+$ curl -X PATCH $API/categorias/15/ -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' -d '{"tarifa_diaria":18000}'
+HTTP 200
+{
+  "id": 15,
+  "nombre": "Evidencia E03",
+  "prefijo_codigo": "EVI",
+  "descripcion": "Categoria de prueba CRUD",
+  "tarifa_diaria": 18000,
+  "tarifa_mensual": 300000,
+  "requiere_horometro": false,
+  "mant_cada_usos": null,
+  "mant_cada_horas": null,
+  "mant_cada_dias": null,
+  "ultimo_correlativo": 0
+}
+
+## VALIDACIÓN → 400 (tarifa 0 y prefijo vacío)
+$ curl -X POST $API/categorias/ -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' -d '{"nombre":"Invalida","prefijo_codigo":"","tarifa_diaria":0,"tarifa_mensual":0}'
+HTTP 400
+{
+  "prefijo_codigo": [
+    "Este campo no puede estar en blanco."
+  ],
+  "tarifa_diaria": [
+    "La tarifa debe ser mayor que 0."
+  ],
+  "tarifa_mensual": [
+    "La tarifa debe ser mayor que 0."
+  ]
+}
+
+## DELETE → 204
+$ curl -X DELETE $API/categorias/15/ -H "Authorization: Bearer $TOKEN"
+HTTP 204
+
+## READ después de borrar → 404
+$ curl $API/categorias/15/ -H "Authorization: Bearer $TOKEN"
+HTTP 404
+{
+  "detail": "No CategoriaActivo matches the given query."
+}
+

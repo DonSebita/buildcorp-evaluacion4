@@ -1,0 +1,203 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1990" height="1260" viewBox="0 0 1990 1260" font-family="DejaVu Sans, Arial, sans-serif" xmlns:c2pa="http://c2pa.org/manifest">
+<defs>
+<marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#232F3E"/></marker>
+<marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7A7F87"/></marker>
+</defs>
+<rect width="1990" height="1260" fill="#FFFFFF"/>
+<text x="30" y="44" font-size="28" font-weight="bold" fill="#232F3E">BuildCorp · Arquitectura en AWS (Evaluación 4)</text>
+<text x="30" y="70" font-size="15" fill="#545B64">Región us-east-1 · AWS Academy · Django REST + Vite SPA · Evidencia E12</text>
+<rect x="30" y="370" width="210" height="140" rx="8" fill="#FFFFFF" stroke="#232F3E" stroke-width="2"/>
+<path d="M30,378 a8,8 0 0 1 8,-8 h194 a8,8 0 0 1 8,8 v28 h-210 z" fill="#232F3E"/>
+<text x="42" y="395" font-size="16" font-weight="bold" fill="#FFFFFF">Usuarios</text>
+<text x="42" y="426" font-size="13.5" fill="#232F3E">Navegador web</text>
+<text x="42" y="445" font-size="13.5" fill="#232F3E">Admin, Bodeguero,</text>
+<text x="42" y="464" font-size="13.5" fill="#232F3E">Encargado, Ventas</text>
+<text x="42" y="483" font-size="13.5" fill="#232F3E">(HTTPS)</text>
+<rect x="30" y="590" width="210" height="110" rx="8" fill="#FFFFFF" stroke="#545B64" stroke-width="2"/>
+<path d="M30,598 a8,8 0 0 1 8,-8 h194 a8,8 0 0 1 8,8 v28 h-210 z" fill="#545B64"/>
+<text x="42" y="615" font-size="16" font-weight="bold" fill="#FFFFFF">Administrador</text>
+<text x="42" y="646" font-size="13.5" fill="#232F3E">Consola AWS y SSH</text>
+<text x="42" y="665" font-size="13.5" fill="#232F3E">desde IP autorizada</text>
+<rect x="30" y="880" width="210" height="150" rx="8" fill="#FFFFFF" stroke="#24292F" stroke-width="2"/>
+<path d="M30,888 a8,8 0 0 1 8,-8 h194 a8,8 0 0 1 8,8 v28 h-210 z" fill="#24292F"/>
+<text x="42" y="905" font-size="16" font-weight="bold" fill="#FFFFFF">GitHub</text>
+<text x="42" y="936" font-size="13.5" fill="#232F3E">DonSebita/</text>
+<text x="42" y="955" font-size="13.5" fill="#232F3E">buildcorp-evaluacion4</text>
+<text x="42" y="974" font-size="13.5" fill="#232F3E">rama main</text>
+<rect x="1760" y="390" width="210" height="130" rx="8" fill="#FFFFFF" stroke="#545B64" stroke-width="2"/>
+<path d="M1760,398 a8,8 0 0 1 8,-8 h194 a8,8 0 0 1 8,8 v28 h-210 z" fill="#545B64"/>
+<text x="1772" y="415" font-size="16" font-weight="bold" fill="#FFFFFF">Correo</text>
+<text x="1772" y="446" font-size="13.5" fill="#232F3E">Suscriptor del tema</text>
+<text x="1772" y="465" font-size="13.5" fill="#232F3E">SNS (email</text>
+<text x="1772" y="484" font-size="13.5" fill="#232F3E">confirmado)</text>
+<rect x="275" y="95" width="1450" height="1130" rx="6" fill="none" stroke="#232F3E" stroke-width="2"/>
+<text x="287" y="117" font-size="17" font-weight="bold" fill="#232F3E">AWS Cloud · us-east-1 (AWS Academy, cuenta del laboratorio)</text>
+<rect x="300" y="345" width="1110" height="460" rx="6" fill="#F2F8F0" stroke="#248814" stroke-width="2"/>
+<text x="312" y="367" font-size="15" font-weight="bold" fill="#248814">VPC por defecto (172.31.0.0/16) · subredes públicas por AZ</text>
+<rect x="325" y="385" width="345" height="400" rx="6" fill="none" stroke="#DD344C" stroke-width="2" stroke-dasharray="6,4"/>
+<text x="337" y="407" font-size="14" font-weight="bold" fill="#DD344C">sg-frontend</text>
+<text x="337" y="428" font-size="12" fill="#DD344C">Entrada: 80, 443 (0.0.0.0/0) · 22 (IP admin)</text>
+<rect x="715" y="385" width="345" height="400" rx="6" fill="none" stroke="#DD344C" stroke-width="2" stroke-dasharray="6,4"/>
+<text x="727" y="407" font-size="14" font-weight="bold" fill="#DD344C">sg-backend</text>
+<text x="727" y="428" font-size="12" fill="#DD344C">Entrada: 80 (API Gateway) · 22 (IP admin)</text>
+<rect x="1100" y="385" width="290" height="400" rx="6" fill="none" stroke="#DD344C" stroke-width="2" stroke-dasharray="6,4"/>
+<text x="1112" y="407" font-size="14" font-weight="bold" fill="#DD344C">buildcorp-sg-rds</text>
+<text x="1112" y="428" font-size="12" fill="#DD344C">Entrada: 5432 solo desde sg-backend</text>
+<rect x="340" y="445" width="315" height="320" rx="8" fill="#FFFFFF" stroke="#ED7100" stroke-width="2"/>
+<path d="M340,453 a8,8 0 0 1 8,-8 h299 a8,8 0 0 1 8,8 v28 h-315 z" fill="#ED7100"/>
+<text x="352" y="470" font-size="16" font-weight="bold" fill="#FFFFFF">EC2 Frontend</text>
+<text x="352" y="501" font-size="13.5" fill="#232F3E">Ubuntu · t3.small</text>
+<text x="352" y="520" font-size="13.5" fill="#232F3E" font-weight="bold">Nginx + SPA Vite (estática)</text>
+<text x="352" y="539" font-size="13.5" fill="#232F3E">HTTPS con Let's Encrypt</text>
+<text x="352" y="558" font-size="13.5" fill="#232F3E">(certbot.timer renueva)</text>
+<text x="352" y="577" font-size="13.5" fill="#232F3E">HTTP 80 → redirige a 443</text>
+<text x="352" y="596" font-size="13.5" fill="#232F3E"></text>
+<text x="352" y="615" font-size="13.5" fill="#232F3E" font-weight="bold">Dominio:</text>
+<text x="352" y="634" font-size="13.5" fill="#232F3E">buildcorp.184-197-126-20</text>
+<text x="352" y="653" font-size="13.5" fill="#232F3E">.sslip.io</text>
+<text x="352" y="672" font-size="13.5" fill="#232F3E"></text>
+<text x="352" y="691" font-size="13.5" fill="#232F3E">Auto-deploy: timer systemd</text>
+<text x="352" y="710" font-size="13.5" fill="#232F3E">cada 2 min (git pull)</text>
+<rect x="730" y="445" width="315" height="320" rx="8" fill="#FFFFFF" stroke="#ED7100" stroke-width="2"/>
+<path d="M730,453 a8,8 0 0 1 8,-8 h299 a8,8 0 0 1 8,8 v28 h-315 z" fill="#ED7100"/>
+<text x="742" y="470" font-size="16" font-weight="bold" fill="#FFFFFF">EC2 Backend</text>
+<text x="742" y="501" font-size="13.5" fill="#232F3E">Ubuntu · t3.small</text>
+<text x="742" y="520" font-size="13.5" fill="#232F3E" font-weight="bold">Nginx → Gunicorn → Django REST</text>
+<text x="742" y="539" font-size="13.5" fill="#232F3E">Autenticación JWT (SimpleJWT)</text>
+<text x="742" y="558" font-size="13.5" fill="#232F3E">Roles y permisos por grupo</text>
+<text x="742" y="577" font-size="13.5" fill="#232F3E" font-weight="bold">Rechaza con 403 si falta</text>
+<text x="742" y="596" font-size="13.5" fill="#232F3E" font-weight="bold">la cabecera X-Origin-Verify</text>
+<text x="742" y="615" font-size="13.5" fill="#232F3E">Contraseñas: hash PBKDF2/Argon2</text>
+<text x="742" y="634" font-size="13.5" fill="#232F3E">.env con permisos 600</text>
+<text x="742" y="653" font-size="13.5" fill="#232F3E">cron diario: revisar_morosidad,</text>
+<text x="742" y="672" font-size="13.5" fill="#232F3E">revisar_mantenimientos</text>
+<text x="742" y="691" font-size="13.5" fill="#232F3E">Auto-deploy: timer systemd</text>
+<text x="742" y="710" font-size="13.5" fill="#232F3E">cada 2 min (git pull)</text>
+<rect x="1115" y="445" width="260" height="320" rx="8" fill="#FFFFFF" stroke="#3B48CC" stroke-width="2"/>
+<path d="M1115,453 a8,8 0 0 1 8,-8 h244 a8,8 0 0 1 8,8 v28 h-260 z" fill="#3B48CC"/>
+<text x="1127" y="470" font-size="16" font-weight="bold" fill="#FFFFFF">Amazon RDS</text>
+<text x="1127" y="501" font-size="13.5" fill="#232F3E" font-weight="bold">PostgreSQL · buildcorp-db</text>
+<text x="1127" y="520" font-size="13.5" fill="#232F3E">Sin acceso público</text>
+<text x="1127" y="539" font-size="13.5" fill="#232F3E">Cifrado en reposo (KMS)</text>
+<text x="1127" y="558" font-size="13.5" fill="#232F3E">Conexión SSL obligatoria</text>
+<text x="1127" y="577" font-size="13.5" fill="#232F3E">(sslmode=require)</text>
+<text x="1127" y="596" font-size="13.5" fill="#232F3E">Backups automáticos</text>
+<text x="1127" y="615" font-size="13.5" fill="#232F3E">con retención</text>
+<text x="1127" y="634" font-size="13.5" fill="#232F3E">Puerto 5432</text>
+<rect x="560" y="130" width="450" height="170" rx="8" fill="#FFFFFF" stroke="#E7157B" stroke-width="2"/>
+<path d="M560,138 a8,8 0 0 1 8,-8 h434 a8,8 0 0 1 8,8 v28 h-450 z" fill="#E7157B"/>
+<text x="572" y="155" font-size="16" font-weight="bold" fill="#FFFFFF">Amazon API Gateway (HTTP API)</text>
+<text x="572" y="186" font-size="13.5" fill="#232F3E" font-weight="bold">buildcorp-api · f5nr8vmiu8</text>
+<text x="572" y="205" font-size="13.5" fill="#232F3E">Ruta ANY /api/{proxy+} → EC2 Backend</text>
+<text x="572" y="224" font-size="13.5" fill="#232F3E">Throttling: 2 req/s, ráfaga 5 (429)</text>
+<text x="572" y="243" font-size="13.5" fill="#232F3E">Agrega cabecera X-Origin-Verify</text>
+<text x="572" y="262" font-size="13.5" fill="#232F3E">Access logs → CloudWatch Logs</text>
+<rect x="730" y="860" width="315" height="215" rx="8" fill="#FFFFFF" stroke="#3F8624" stroke-width="2"/>
+<path d="M730,868 a8,8 0 0 1 8,-8 h299 a8,8 0 0 1 8,8 v28 h-315 z" fill="#3F8624"/>
+<text x="742" y="885" font-size="16" font-weight="bold" fill="#FFFFFF">Amazon S3</text>
+<text x="742" y="916" font-size="13.5" fill="#232F3E" font-weight="bold">buildcorp-sebastian-assets</text>
+<text x="742" y="935" font-size="13.5" fill="#232F3E">Block Public Access activado</text>
+<text x="742" y="954" font-size="13.5" fill="#232F3E">Cifrado SSE del lado servidor</text>
+<text x="742" y="973" font-size="13.5" fill="#232F3E">Política: solo HTTPS</text>
+<text x="742" y="992" font-size="13.5" fill="#232F3E">(aws:SecureTransport)</text>
+<text x="742" y="1011" font-size="13.5" fill="#232F3E">Fotos, manuales y estáticos</text>
+<text x="742" y="1030" font-size="13.5" fill="#232F3E">URLs prefirmadas con expiración</text>
+<rect x="1115" y="860" width="260" height="130" rx="8" fill="#FFFFFF" stroke="#DD344C" stroke-width="2"/>
+<path d="M1115,868 a8,8 0 0 1 8,-8 h244 a8,8 0 0 1 8,8 v28 h-260 z" fill="#DD344C"/>
+<text x="1127" y="885" font-size="16" font-weight="bold" fill="#FFFFFF">AWS KMS</text>
+<text x="1127" y="916" font-size="13.5" fill="#232F3E">Clave de cifrado de RDS</text>
+<text x="1127" y="935" font-size="13.5" fill="#232F3E">y de sus snapshots</text>
+<rect x="1445" y="130" width="255" height="195" rx="8" fill="#FFFFFF" stroke="#E7157B" stroke-width="2"/>
+<path d="M1445,138 a8,8 0 0 1 8,-8 h239 a8,8 0 0 1 8,8 v28 h-255 z" fill="#E7157B"/>
+<text x="1457" y="155" font-size="16" font-weight="bold" fill="#FFFFFF">Amazon CloudWatch</text>
+<text x="1457" y="186" font-size="13.5" fill="#232F3E">Dashboard: CPU EC2, RDS,</text>
+<text x="1457" y="205" font-size="13.5" fill="#232F3E">4xx/5xx de API Gateway</text>
+<text x="1457" y="224" font-size="13.5" fill="#232F3E">Métricas y logs</text>
+<text x="1457" y="243" font-size="13.5" fill="#232F3E" font-weight="bold">Alarmas → SNS</text>
+<rect x="1445" y="385" width="255" height="140" rx="8" fill="#FFFFFF" stroke="#E7157B" stroke-width="2"/>
+<path d="M1445,393 a8,8 0 0 1 8,-8 h239 a8,8 0 0 1 8,8 v28 h-255 z" fill="#E7157B"/>
+<text x="1457" y="410" font-size="16" font-weight="bold" fill="#FFFFFF">Amazon SNS</text>
+<text x="1457" y="441" font-size="13.5" fill="#232F3E" font-weight="bold">Tema buildcorp-alertas</text>
+<text x="1457" y="460" font-size="13.5" fill="#232F3E">Suscripción por email</text>
+<text x="1457" y="479" font-size="13.5" fill="#232F3E">Alarmas y avisos de backup</text>
+<rect x="1445" y="590" width="255" height="130" rx="8" fill="#FFFFFF" stroke="#E7157B" stroke-width="2"/>
+<path d="M1445,598 a8,8 0 0 1 8,-8 h239 a8,8 0 0 1 8,8 v28 h-255 z" fill="#E7157B"/>
+<text x="1457" y="615" font-size="16" font-weight="bold" fill="#FFFFFF">EventBridge Scheduler</text>
+<text x="1457" y="646" font-size="13.5" fill="#232F3E" font-weight="bold">rate(7 hours)</text>
+<text x="1457" y="665" font-size="13.5" fill="#232F3E">Invoca la Lambda de</text>
+<text x="1457" y="684" font-size="13.5" fill="#232F3E">snapshots</text>
+<rect x="1445" y="780" width="255" height="160" rx="8" fill="#FFFFFF" stroke="#ED7100" stroke-width="2"/>
+<path d="M1445,788 a8,8 0 0 1 8,-8 h239 a8,8 0 0 1 8,8 v28 h-255 z" fill="#ED7100"/>
+<text x="1457" y="805" font-size="16" font-weight="bold" fill="#FFFFFF">AWS Lambda</text>
+<text x="1457" y="836" font-size="13.5" fill="#232F3E" font-weight="bold">buildcorp-snapshot-7h</text>
+<text x="1457" y="855" font-size="13.5" fill="#232F3E">Python + boto3 (LabRole)</text>
+<text x="1457" y="874" font-size="13.5" fill="#232F3E">Crea snapshot manual de RDS</text>
+<text x="1457" y="893" font-size="13.5" fill="#232F3E">Borra snapshots &gt; 72 h</text>
+<text x="1457" y="912" font-size="13.5" fill="#232F3E">Publica resultado en SNS</text>
+<rect x="1445" y="1000" width="255" height="120" rx="8" fill="#FFFFFF" stroke="#3B48CC" stroke-width="2"/>
+<path d="M1445,1008 a8,8 0 0 1 8,-8 h239 a8,8 0 0 1 8,8 v28 h-255 z" fill="#3B48CC"/>
+<text x="1457" y="1025" font-size="16" font-weight="bold" fill="#FFFFFF">Snapshots de RDS</text>
+<text x="1457" y="1056" font-size="13.5" fill="#232F3E">Manuales cada 7 h</text>
+<text x="1457" y="1075" font-size="13.5" fill="#232F3E">Retención: 72 horas</text>
+<text x="1457" y="1094" font-size="13.5" fill="#232F3E">Restaurables a instancia</text>
+<path d="M240,410 L270,410 L270,215 L560,215" fill="none" stroke="#232F3E" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="300" y="205" font-size="13" text-anchor="start" fill="#FFFFFF" font-weight="bold" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round">(1) HTTPS: fetch /api/* + JWT</text>
+<text x="300" y="205" font-size="13" text-anchor="start" fill="#232F3E" font-weight="bold">(1) HTTPS: fetch /api/* + JWT</text>
+<path d="M240,470 L340,470" fill="none" stroke="#232F3E" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="246" y="452" font-size="13" text-anchor="start" fill="#FFFFFF" font-weight="bold" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round">(2) HTTPS 443</text>
+<text x="246" y="452" font-size="13" text-anchor="start" fill="#232F3E" font-weight="bold">(2) HTTPS 443</text>
+<text x="248" y="490" font-size="12" fill="#232F3E">(SPA)</text>
+<path d="M990,300 L990,445" fill="none" stroke="#232F3E" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="780" y="325" font-size="13" text-anchor="start" fill="#FFFFFF" font-weight="bold" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round">(3) HTTP + X-Origin-Verify</text>
+<text x="780" y="325" font-size="13" text-anchor="start" fill="#232F3E" font-weight="bold">(3) HTTP + X-Origin-Verify</text>
+<path d="M1045,600 L1115,600" fill="none" stroke="#232F3E" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="1050" y="590" font-size="13" text-anchor="start" fill="#FFFFFF" font-weight="bold" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round">(4) 5432</text>
+<text x="1050" y="590" font-size="13" text-anchor="start" fill="#232F3E" font-weight="bold">(4) 5432</text>
+<text x="1050" y="625" font-size="12" fill="#232F3E" font-weight="bold">SSL</text>
+<path d="M887,765 L887,860" fill="none" stroke="#232F3E" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="897" y="822" font-size="13" text-anchor="start" fill="#FFFFFF" font-weight="bold" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round">(5) boto3: subir/leer</text>
+<text x="897" y="822" font-size="13" text-anchor="start" fill="#232F3E" font-weight="bold">(5) boto3: subir/leer</text>
+<text x="897" y="838" font-size="12" fill="#232F3E" font-weight="bold">+ URLs prefirmadas</text>
+<text x="285" y="250" font-size="12" fill="#545B64">(la SPA se ejecuta en el navegador</text>
+<text x="285" y="266" font-size="12" fill="#545B64"> y llama a la API por API Gateway)</text>
+<path d="M1245,860 L1245,765" fill="none" stroke="#7A7F87" stroke-width="2.2" stroke-dasharray="7,5" marker-end="url(#ag)"/>
+<text x="1255" y="820" font-size="13" text-anchor="start" fill="#FFFFFF" font-weight="bold" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round">cifra</text>
+<text x="1255" y="820" font-size="13" text-anchor="start" fill="#7A7F87" font-weight="bold">cifra</text>
+<path d="M240,645 L340,645" fill="none" stroke="#7A7F87" stroke-width="2.2" stroke-dasharray="7,5" marker-end="url(#ag)"/>
+<text x="250" y="637" font-size="13" text-anchor="start" fill="#FFFFFF" font-weight="bold" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round">SSH 22</text>
+<text x="250" y="637" font-size="13" text-anchor="start" fill="#7A7F87" font-weight="bold">SSH 22</text>
+<path d="M240,955 L312,955 L312,740 L340,740" fill="none" stroke="#7A7F87" stroke-width="2.2" stroke-dasharray="7,5" marker-end="url(#ag)"/>
+<text x="250" y="1052" font-size="13" text-anchor="start" fill="#FFFFFF" font-weight="bold" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round">git pull cada 2 min</text>
+<text x="250" y="1052" font-size="13" text-anchor="start" fill="#7A7F87" font-weight="bold">git pull cada 2 min</text>
+<path d="M312,820 L700,820 L700,740 L730,740" fill="none" stroke="#7A7F87" stroke-width="2.2" stroke-dasharray="7,5" marker-end="url(#ag)"/>
+<path d="M1010,170 L1445,170" fill="none" stroke="#7A7F87" stroke-width="2.2" stroke-dasharray="7,5" marker-end="url(#ag)"/>
+<text x="1030" y="160" font-size="13" text-anchor="start" fill="#FFFFFF" font-weight="bold" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round">access logs + métricas 4xx</text>
+<text x="1030" y="160" font-size="13" text-anchor="start" fill="#7A7F87" font-weight="bold">access logs + métricas 4xx</text>
+<path d="M1410,360 L1445,300" fill="none" stroke="#7A7F87" stroke-width="2.2" stroke-dasharray="7,5" marker-end="url(#ag)"/>
+<text x="1300" y="340" font-size="12" fill="#7A7F87" font-weight="bold">métricas EC2/RDS</text>
+<path d="M1572,325 L1572,385" fill="none" stroke="#232F3E" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="1582" y="362" font-size="13" text-anchor="start" fill="#FFFFFF" font-weight="bold" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round">alarma</text>
+<text x="1582" y="362" font-size="13" text-anchor="start" fill="#232F3E" font-weight="bold">alarma</text>
+<path d="M1700,455 L1760,455" fill="none" stroke="#232F3E" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="1705" y="445" font-size="13" text-anchor="start" fill="#FFFFFF" font-weight="bold" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round">email</text>
+<text x="1705" y="445" font-size="13" text-anchor="start" fill="#232F3E" font-weight="bold">email</text>
+<path d="M1572,720 L1572,780" fill="none" stroke="#232F3E" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="1582" y="756" font-size="13" text-anchor="start" fill="#FFFFFF" font-weight="bold" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round">invoca</text>
+<text x="1582" y="756" font-size="13" text-anchor="start" fill="#232F3E" font-weight="bold">invoca</text>
+<path d="M1572,940 L1572,1000" fill="none" stroke="#232F3E" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="1582" y="976" font-size="13" text-anchor="start" fill="#FFFFFF" font-weight="bold" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round">crea / borra</text>
+<text x="1582" y="976" font-size="13" text-anchor="start" fill="#232F3E" font-weight="bold">crea / borra</text>
+<path d="M1445,860 L1400,860 L1400,835 L1300,835 L1300,765" fill="none" stroke="#232F3E" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="1308" y="828" font-size="12" fill="#232F3E" font-weight="bold">CreateDBSnapshot</text>
+<path d="M1700,830 L1716,830 L1716,500 L1700,500" fill="none" stroke="#232F3E" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="1734" y="700" font-size="12" fill="#232F3E" font-weight="bold" text-anchor="middle" transform="rotate(-90 1734 700)">notifica</text>
+<rect x="30" y="1090" width="235" height="140" rx="6" fill="#FAFAFA" stroke="#D5DBDB"/>
+<text x="42" y="1114" font-size="14" font-weight="bold" fill="#232F3E">Leyenda</text>
+<path d="M42,1138 h50" stroke="#232F3E" stroke-width="2.2" marker-end="url(#ar)"/>
+<text x="102" y="1142" font-size="12">Flujo de datos</text>
+<path d="M42,1164 h50" stroke="#7A7F87" stroke-width="2.2" stroke-dasharray="7,5" marker-end="url(#ag)"/>
+<text x="102" y="1168" font-size="12">Gestión / monitoreo</text>
+<rect x="42" y="1182" width="50" height="16" fill="none" stroke="#DD344C" stroke-dasharray="6,4" stroke-width="2"/>
+<text x="102" y="1195" font-size="12">Security Group</text>
+<text x="42" y="1218" font-size="12">(1)–(5) orden de una petición</text>
+<metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTo5ODg0M2ZjNy03MzUzLTQ4YjQtYmI0MC0zMzExNDk3Njk3M2QAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaNDOop7Na8VZy770owjmktUAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDo4ZDZmNzAzOC05YTVjLTQxZjgtODExMS01ODdjYjQxZjJjYWJscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoSu9b5TFLkwRYe2IoEn7B3gAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggEC8vIl/9L/6U5adtFwMNh1SVP470ziuxpTdSfCd/HsekZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaMmOYrC6D5NQzJImfkNl/D0AAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRMAAAAAAAAAAAAAAAAZGhhc2hYICT0+WfPlEsttKrwgO+Qe2NITw2Q23eyvWhod6nHpfzgZG5hbWVuanVtYmYgbWFuaWZlc3RqZXhjbHVzaW9uc4GiZXN0YXJ0GU83Zmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjk4ODQzZmM3LTczNTMtNDhiNC1iYjQwLTMzMTE0OTc2OTczZC9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjY2MmUwNTQzLWM5NzMtNDIzMC1hYzc5LWE5MjY5NDU5ZDZjYXJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCAQLy8iX/0v/pTlp20XAw2HVJU/jvTOK7GlN1J8J38ex6JjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggULkPZB9zNXSeLN2KEVMotWONVA8+3+QVqlOmJoDMwt+iY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggS7WUka4HQZ0ANyodVqF3CZjhrzZd5dHAXXLuvVGNKkJ0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQLy45ChX13Br2yN73lRbkE3IMApKVWdb5fiqrGtZJMX7WiPsTflpMnmTywBPTt7uR52kheyeT7KnIhhyx7RtaOY=</c2pa:manifest></metadata></svg>

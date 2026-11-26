@@ -2,12 +2,15 @@
 
 Sistema **interno** de BuildCorp para controlar el arriendo de maquinaria a contratistas: catálogo con trazabilidad, entregas y devoluciones con **firma digital**, **mantenimiento preventivo** automático, **cobros en CLP** y **bloqueo automático de morosos**.
 
-Hecho con **Django 6 + Django REST Framework + PostgreSQL**, desplegado en una **EC2 de AWS Academy** con Nginx, Gunicorn y HTTPS.
+Hecho con **Django 6 + Django REST Framework + PostgreSQL**, desplegado en AWS Academy: EC2 frontend (Vite + Nginx, HTTPS) y EC2 backend (Nginx + Gunicorn) detrás de API Gateway, con RDS PostgreSQL y S3. Arquitectura: [diagrama E12](docs/evidencias/E12_diagrama_arquitectura.png).
 
 | | |
 |---|---|
-| **App en producción (HTTPS)** | https://100-60-151-204.sslip.io/ |
-| **Acceso por IP (HTTP)** | http://100.60.151.204/ |
+| **App en producción (HTTPS)** | https://buildcorp.184-197-126-20.sslip.io |
+| **API (Swagger vía API Gateway)** | https://f5nr8vmiu8.execute-api.us-east-1.amazonaws.com/api/docs/ |
+| **Evidencias (Evaluación 4)** | [docs/evidencias/INDICE.md](docs/evidencias/INDICE.md) |
+| **Guía para la presentación** | [docs/PASO_A_PASO_PRESENTACION.md](docs/PASO_A_PASO_PRESENTACION.md) |
+| **Informe SAST/DAST** | [docs/INFORME_SAST_DAST.md](docs/INFORME_SAST_DAST.md) |
 | **Usuarios demo** | `admin` · `bodeguero` · `encargado` · `ventas` |
 | **Contraseña demo** | `buildcorp2026` (también en el botón **?** del login) |
 

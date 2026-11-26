@@ -1,0 +1,112 @@
+### BuildCorp API · pruebas manuales (VS Code REST Client / JetBrains HTTP Client)
+# Cambia @base para probar contra API Gateway:
+#   @base = https://f5nr8vmiu8.execute-api.us-east-1.amazonaws.com/api/v1
+# Usuarios demo (cargar_demo): admin, bodeguero, encargado, ventas.
+# La clave demo NO se escribe aquí: defínela como variable de entorno del cliente
+# ({{$processEnv BUILDCORP_CLAVE}}) o reemplázala solo en tu copia local.
+
+@base = http://localhost:8000/api/v1
+@clave = {{$processEnv BUILDCORP_CLAVE}}
+
+### 1. Login (JWT) -> 200 {access, refresh}
+# @name login
+POST {{base}}/auth/token/
+Content-Type: application/json
+
+{"username": "admin", "password": "{{clave}}"}
+
+###
+@access = {{login.response.body.access}}
+@refresh = {{login.response.body.refresh}}
+
+### 2. Usuario actual -> 200 {id, username, nombre, rol}
+GET {{base}}/auth/me/
+Authorization: Bearer {{access}}
+
+### 3. Refresh -> 200 con access y refresh nuevos (el refresh anterior queda en lista negra)
+# @name renovar
+POST {{base}}/auth/token/refresh/
+Content-Type: application/json
+
+{"refresh": "{{refresh}}"}
+
+### 4. 401: sin token
+GET {{base}}/contratistas/
+
+### 5. 401: token inválido
+GET {{base}}/contratistas/
+Authorization: Bearer token-invalido
+
+### 6. GET lista paginada (filtro y búsqueda)
+GET {{base}}/contratistas/?search=andes
+Authorization: Bearer {{access}}
+
+### 7. POST -> 201
+# @name nuevo
+POST {{base}}/contratistas/
+Authorization: Bearer {{access}}
+Content-Type: application/json
+
+{"rut": "11.111.111-1", "razon_social": "Prueba API SpA", "contacto": "Ana Pérez"}
+
+###
+@id = {{nuevo.response.body.id}}
+
+### 8. POST con RUT inválido -> 400 {"rut": ["El dígito verificador del RUT no es válido."]}
+POST {{base}}/contratistas/
+Authorization: Bearer {{access}}
+Content-Type: application/json
+
+{"rut": "11.111.111-2", "razon_social": "X"}
+
+### 9. PUT (reemplazo completo) -> 200
+PUT {{base}}/contratistas/{{id}}/
+Authorization: Bearer {{access}}
+Content-Type: application/json
+
+{"rut": "11.111.111-1", "razon_social": "Prueba API Ltda.", "contacto": "Ana Pérez"}
+
+### 10. PATCH (parcial) -> 200
+PATCH {{base}}/contratistas/{{id}}/
+Authorization: Bearer {{access}}
+Content-Type: application/json
+
+{"telefono": "+56 9 1111 1111"}
+
+### 11. DELETE -> 204
+DELETE {{base}}/contratistas/{{id}}/
+Authorization: Bearer {{access}}
+
+### 12. Subir foto de un activo (multipart) -> 200 con foto_url (prefirmada si USE_S3=True)
+PATCH {{base}}/activos/31/
+Authorization: Bearer {{access}}
+Content-Type: multipart/form-data; boundary=limite
+
+--limite
+Content-Disposition: form-data; name="foto"; filename="foto.png"
+Content-Type: image/png
+
+< ./foto.png
+--limite--
+
+### 13. 403: rol Ventas intenta borrar un activo
+# @name loginVentas
+POST {{base}}/auth/token/
+Content-Type: application/json
+
+{"username": "ventas", "password": "{{clave}}"}
+
+###
+DELETE {{base}}/activos/31/
+Authorization: Bearer {{loginVentas.response.body.access}}
+
+### 14. Dashboard -> 200
+GET {{base}}/dashboard/resumen/
+Authorization: Bearer {{access}}
+
+### 15. Logout (refresh a la lista negra) -> 200; luego usar ese refresh da 401
+POST {{base}}/auth/logout/
+Authorization: Bearer {{access}}
+Content-Type: application/json
+
+{"refresh": "{{renovar.response.body.refresh}}"}

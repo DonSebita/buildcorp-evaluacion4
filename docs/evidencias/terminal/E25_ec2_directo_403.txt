@@ -1,0 +1,43 @@
+# E25 · Llamada directa a la EC2 backend sin cabecera de origen → 403  (2026-11-26 13:05 UTC)
+# La EC2 solo acepta peticiones que traen X-Origin-Verify, que añade API Gateway.
+
+$ curl -i http://54.197.0.230/api/v1/categorias/     # directo a la EC2
+HTTP 403
+<html>
+<head><title>403 Forbidden</title></head>
+<body>
+<center><h1>403 Forbidden</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+
+$ curl -i http://54.197.0.230/api/v1/auth/token/ -X POST -H 'Content-Type: application/json' -d '{"username":"admin","password":"buildcorp2026"}'
+HTTP 403
+<html>
+<head><title>403 Forbidden</title></head>
+<body>
+<center><h1>403 Forbidden</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+
+$ curl -i http://54.197.0.230/api/v1/categorias/ -H 'X-Origin-Verify: valor-adivinado'
+HTTP 403
+<html>
+<head><title>403 Forbidden</title></head>
+<body>
+<center><h1>403 Forbidden</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+
+# Misma ruta a través de API Gateway (que sí agrega la cabecera): llega a Django
+$ curl $API/categorias/       # sin token → 401 de Django, no 403 de Nginx
+HTTP 401
+{
+  "detail": "Las credenciales de autenticación no se proveyeron."
+}
+

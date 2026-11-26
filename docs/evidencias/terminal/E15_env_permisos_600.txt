@@ -1,0 +1,23 @@
+# E15 · .env del backend con permisos 600 (sin mostrar valores)  (2026-11-26 13:09 UTC)
+
+$ ssh -i buildcorp-key.pem ubuntu@54.197.0.230
+ubuntu@backend:~/BuildCorp$ ls -l .env ~/buildcorp-backend.env
+-rw------- 1 ubuntu ubuntu 888 Nov 26 09:59 .env
+-rw------- 1 ubuntu ubuntu 478 Nov 26 09:42 /home/ubuntu/buildcorp-backend.env
+ubuntu@backend:~/BuildCorp$ stat -c "%A  %a  %U:%G  %n" .env ~/buildcorp-backend.env
+-rw-------  600  ubuntu:ubuntu  .env
+-rw-------  600  ubuntu:ubuntu  /home/ubuntu/buildcorp-backend.env
+ubuntu@backend:~/BuildCorp$ sudo -u www-data cat .env
+cat: .env: Permission denied
+ubuntu@backend:~/BuildCorp$ cut -d= -f1 .env      # solo los nombres de las variables
+SECRET_KEY
+DEBUG
+DATABASE_URL
+ALLOWED_HOSTS
+CSRF_TRUSTED_ORIGINS
+CORS_ALLOWED_ORIGINS
+USE_S3
+AWS_STORAGE_BUCKET_NAME
+AWS_S3_REGION_NAME
+MOSTRAR_CREDENCIALES_DEMO
+SITE_URL

@@ -1,0 +1,30 @@
+# E33 · URL prefirmada de S3 funcionando y luego expirada  (2026-11-26 13:08:26 UTC)
+# Bucket privado buildcorp-sebastian-assets · objeto media/firmas/2026/11/P-2026-0001-entrega.png
+# URLs generadas en la EC2 backend con el rol LabInstanceProfile (sin llaves en el código)
+
+## 1) Sin firma: el bucket es privado
+$ curl -s -o /dev/null -w 'HTTP %{http_code}\n' https://buildcorp-sebastian-assets.s3.amazonaws.com/media/firmas/2026/11/P-2026-0001-entrega.png
+HTTP 403
+
+## 2) URL que entrega la app: default_storage.url(...)  (querystring_expire = 900 s)
+$ python manage.py shell -c "print(default_storage.url('firmas/2026/11/P-2026-0001-entrega.png'))"
+https://buildcorp-sebastian-assets.s3.amazonaws.com/media/firmas/2026/11/P-2026-0001-entrega.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=…&X-Amz-Date=20261126T130818Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Security-Token=…(token temporal recortado)&X-Amz-Signature=…
+$ curl -s -o firma.png -w 'HTTP %{http_code} | %{content_type} | %{size_download} bytes\n' "$URL_APP"
+HTTP 200 | image/png | 2418 bytes
+
+## 3) URL corta de prueba: s3.generate_presigned_url('get_object', ..., ExpiresIn=20)
+https://buildcorp-sebastian-assets.s3.amazonaws.com/media/firmas/2026/11/P-2026-0001-entrega.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=…&X-Amz-Date=20261126T130818Z&X-Amz-Expires=20&X-Amz-SignedHeaders=host&X-Amz-Security-Token=…(token temporal recortado)&X-Amz-Signature=…
+$ curl -s -o firma.png -w 'HTTP %{http_code} | %{content_type} | %{size_download} bytes\n' "$URL_20S"
+HTTP 200 | image/png | 2418 bytes
+
+$ sleep 30    # esperar a que venza
+$ curl -s "$URL_20S"
+<?xml version="1.0" encoding="UTF-8"?>
+<Error>
+<Code>AccessDenied</Code>
+<Message>Request has expired</Message>
+<X-Amz-Expires>20</X-Amz-Expires>
+<Expires>2026-11-26T13:08:38Z</Expires>
+<ServerTime>2026-11-26T13:08:56Z</ServerTime>
+</Error>
+HTTP 403

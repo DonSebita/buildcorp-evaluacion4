@@ -1,0 +1,19 @@
+# E02 · Login JWT vía API Gateway  (2026-11-26 13:04 UTC)
+$ export API=https://f5nr8vmiu8.execute-api.us-east-1.amazonaws.com/api/v1
+
+$ curl -X POST $API/auth/token/ -H 'Content-Type: application/json' -d '{"username":"admin","password":"buildcorp2026"}'
+HTTP 200
+{
+  "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ…(recortado)",
+  "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ…(recortado)"
+}
+
+$ curl $API/auth/me/ -H "Authorization: Bearer $TOKEN"
+HTTP 200
+{
+  "id": 1,
+  "username": "admin",
+  "nombre": "Patricia Soto Lagos",
+  "rol": "Administrador"
+}
+

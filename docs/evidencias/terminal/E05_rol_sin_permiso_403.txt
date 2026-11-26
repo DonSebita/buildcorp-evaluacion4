@@ -1,0 +1,61 @@
+# E05 · Rol sin permiso → 403  (2026-11-26 13:05 UTC)
+# Usuario: ventas (rol Ventas). Categorías: escritura solo Administrador; Activos: escritura solo Bodeguero.
+
+$ curl $API/auth/me/ -H "Authorization: Bearer $TOKEN"
+HTTP 200
+{
+  "id": 4,
+  "username": "ventas",
+  "nombre": "Camila Rojas Díaz",
+  "rol": "Ventas"
+}
+
+$ curl $API/categorias/ -H "Authorization: Bearer $TOKEN"   # lectura permitida
+HTTP 200
+{
+  "count": 13,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 13,
+      "nombre": "Andamio (cuerpo)",
+      "prefijo_codigo": "AND",
+      "descripcion": "",
+      "tarifa_diaria": 3000,
+      "tarifa_mensual": 60000,
+      "requiere_horometro": false,
+      "mant_cada_usos": 20,
+      "mant_cada_horas": null,
+      "mant_cada_dias": 180,
+      "ultimo_correlativo": 4
+    },
+    {
+      "id": 10,
+      "nombre": "Betonera",
+      "prefijo_codigo": "BET",
+      "descripcion": "",
+      "tarifa_diaria": 22000,
+      "tarifa_mensual": 440000,
+      "requiere_horometro": true,
+      "mant_cada_usos": 8,
+      "mant_cada_horas": 200,
+      "mant_cada_dias": 90,
+      "ultimo_correlativo": 2
+    },
+    "… (11 resultados más en esta página)"
+  ]
+}
+
+$ curl -X POST $API/categorias/ -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' -d '{"nombre":"No autorizada","prefijo_codigo":"NOA","tarifa_diaria":1000,"tarifa_mensual":20000}'
+HTTP 403
+{
+  "detail": "Tu rol no tiene permiso para esta acción."
+}
+
+$ curl -X DELETE $API/activos/1/ -H "Authorization: Bearer $TOKEN"
+HTTP 403
+{
+  "detail": "Tu rol no tiene permiso para esta acción."
+}
+

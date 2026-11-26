@@ -1,0 +1,22 @@
+# E04 · Petición sin token → 401  (2026-11-26 13:05 UTC)
+
+$ curl $API/activos/
+HTTP 401
+{
+  "detail": "Las credenciales de autenticación no se proveyeron."
+}
+
+$ curl $API/activos/ -H 'Authorization: Bearer token.invalido.xyz'
+HTTP 401
+{
+  "detail": "Given token not valid for any token type",
+  "code": "token_not_valid",
+  "messages": [
+    {
+      "token_class": "AccessToken",
+      "token_type": "access",
+      "message": "Token is invalid"
+    }
+  ]
+}
+

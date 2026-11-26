@@ -1,0 +1,19 @@
+# E24 · Prueba de carga contra API Gateway (throttling 2 req/s, ráfaga 5)  (2026-11-26 13:06:16 UTC)
+# 120 peticiones GET a $API/auth/me/ con 60 en paralelo
+
+$ seq 120 | xargs -P 60 -I{} curl -s -o /dev/null -w '%{http_code}\n' $API/auth/me/ | sort | uniq -c
+     97 401
+     23 429
+
+# 401 = la petición pasó el throttling y llegó a Django (va sin token)
+# 429 = API Gateway la rechazó por superar 2 req/s (ráfaga 5) y nunca llegó a la EC2
+
+$ curl -i $API/auth/me/    # una de las respuestas rechazadas, con cabeceras
+HTTP/1.1 429 Too Many Requests
+Date: Thu, 26 Nov 2026 13:06:23 GMT
+Content-Type: application/json
+Content-Length: 31
+apigw-requestid: HcxAehsnoAMESFA=
+
+{"message":"Too Many Requests"}
+
