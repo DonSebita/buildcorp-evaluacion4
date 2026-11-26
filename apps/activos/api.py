@@ -1,10 +1,11 @@
 from django.conf import settings
 from django.core.exceptions import ValidationError as DjangoValidationError
 from django.core.files.storage import default_storage
+from django.db.models import ProtectedError
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404
 from django_filters import rest_framework as filters
-from rest_framework import viewsets
+from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import PermissionDenied, ValidationError
 from rest_framework.response import Response
@@ -52,6 +53,18 @@ class CategoriaViewSet(viewsets.ModelViewSet):
     serializer_class = CategoriaSerializer
     roles_escritura = ()
     search_fields = ["nombre", "prefijo_codigo"]
+
+    def destroy(self, request, *args, **kwargs):
+        """Una categoría con activos o paquetes (on_delete=PROTECT) responde 409, no 500."""
+        categoria = self.get_object()
+        try:
+            categoria.delete()
+        except ProtectedError as e:
+            return Response(
+                {"detail": f"No se puede eliminar {categoria.nombre}: tiene {len(e.protected_objects)} activo(s) o paquete(s) asociado(s)."},
+                status=status.HTTP_409_CONFLICT,
+            )
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class BodegaViewSet(viewsets.ModelViewSet):

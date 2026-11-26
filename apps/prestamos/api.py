@@ -4,14 +4,15 @@ from rest_framework import mixins, viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from apps.activos.api import como_drf
 from apps.usuarios.roles import ENCARGADO, VENTAS
 
 from . import services
-from .models import Cobro, Prestamo, PrestamoPaquete
+from .models import Cobro, ParametroSistema, Prestamo, PrestamoPaquete
 from .serializers import (
-    CobroSerializer, FirmaEntradaSerializer, PrestamoEntradaSerializer, PrestamoListaSerializer, PrestamoSerializer,
+    CobroSerializer, FirmaEntradaSerializer, ParametroSerializer, PrestamoEntradaSerializer, PrestamoListaSerializer, PrestamoSerializer,
 )
 
 
@@ -119,3 +120,29 @@ class CobroViewSet(viewsets.ReadOnlyModelViewSet):
         cobro = self.get_object()
         como_drf(lambda: services.registrar_pago(cobro, request.user))
         return Response(self.get_serializer(cobro).data)
+
+
+class ParametrosView(APIView):
+    """Parámetros del sistema (una sola fila): días de gracia, recargo por atraso e IVA.
+
+    GET: Administrador y Ventas (Ventas los necesita para cotizar). PUT/PATCH: solo Administrador.
+    """
+
+    roles_lectura = (VENTAS,)
+    roles_escritura = ()
+    serializer_class = ParametroSerializer
+
+    def get(self, request):
+        return Response(ParametroSerializer(ParametroSistema.actual()).data)
+
+    def put(self, request):
+        return self._guardar(request, parcial=False)
+
+    def patch(self, request):
+        return self._guardar(request, parcial=True)
+
+    def _guardar(self, request, parcial):
+        serializer = ParametroSerializer(ParametroSistema.actual(), data=request.data, partial=parcial)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)

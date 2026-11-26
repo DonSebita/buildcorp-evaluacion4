@@ -22,14 +22,37 @@ export function tieneRol(rol, permitidos) {
 /**
  * Menú del riel. Cada ítem declara qué roles lo ven (además del Administrador).
  * Contratistas sigue la misma regla que templates/base.html (Ventas y Encargado E/R).
+ * Para un ítem solo del Administrador se usa roles: [ADMIN] (una lista vacía significa «todos»).
  */
 export const MENU = [
-  { seccion: null, items: [{ a: "/dashboard", texto: "Inicio", icono: "bi-grid-1x2", roles: null }] },
+  {
+    seccion: null,
+    items: [
+      { a: "/dashboard", texto: "Inicio", icono: "bi-grid-1x2", roles: null },
+      { a: "/alertas", texto: "Alertas", icono: "bi-bell", roles: null },
+    ],
+  },
   {
     seccion: "Arriendos",
-    items: [{ a: "/contratistas", texto: "Contratistas", icono: "bi-buildings", roles: [VENTAS, ENCARGADO] }],
+    items: [
+      { a: "/contratistas", texto: "Contratistas", icono: "bi-buildings", roles: [VENTAS, ENCARGADO] },
+      { a: "/cobros", texto: "Cobros", icono: "bi-cash-stack", roles: [VENTAS] },
+    ],
   },
-  { seccion: "Inventario", items: [{ a: "/activos", texto: "Activos", icono: "bi-tools", roles: null }] },
+  {
+    seccion: "Inventario",
+    items: [
+      { a: "/activos", texto: "Activos", icono: "bi-tools", roles: null },
+      { a: "/categorias", texto: "Categorías y tarifas", icono: "bi-tags", roles: null },
+    ],
+  },
+  {
+    seccion: "Administración",
+    items: [
+      { a: "/usuarios", texto: "Trabajadores", icono: "bi-people", roles: [ADMIN] },
+      { a: "/parametros", texto: "Parámetros", icono: "bi-sliders", roles: [VENTAS] },
+    ],
+  },
   {
     seccion: "Sistema",
     items: [{ a: "/diagnostico", texto: "Diagnóstico API", icono: "bi-speedometer2", roles: null }],

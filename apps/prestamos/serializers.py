@@ -3,7 +3,7 @@ from rest_framework import serializers
 from apps.activos.models import Activo, PaqueteMaquinaria
 from apps.contratistas.models import Contratista, Obra
 
-from .models import Cobro, DetallePrestamo, Firma, Prestamo, PrestamoPaquete
+from .models import Cobro, DetallePrestamo, Firma, ParametroSistema, Prestamo, PrestamoPaquete
 
 
 class DetalleSerializer(serializers.ModelSerializer):
@@ -105,3 +105,24 @@ class CobroSerializer(serializers.ModelSerializer):
             "monto_atraso", "monto_danos", "neto", "iva", "total", "estado", "estado_display", "creado", "fecha_pago",
         ]
         read_only_fields = fields
+
+
+class ParametroSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ParametroSistema
+        fields = ["dias_gracia", "recargo_atraso", "tasa_iva"]
+
+    def validate_dias_gracia(self, valor):
+        if valor > 60:
+            raise serializers.ValidationError("Máximo 60 días de gracia.")
+        return valor
+
+    def validate_recargo_atraso(self, valor):
+        if valor < 0 or valor > 5:
+            raise serializers.ValidationError("El recargo debe estar entre 0 y 5 (0,5 = +50 %).")
+        return valor
+
+    def validate_tasa_iva(self, valor):
+        if valor < 0 or valor >= 1:
+            raise serializers.ValidationError("La tasa de IVA va entre 0 y 0,99 (0,19 = 19 %).")
+        return valor

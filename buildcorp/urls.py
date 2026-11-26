@@ -4,12 +4,15 @@ from django.contrib import admin
 from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
+from apps.usuarios.api_urls import usuarios_urlpatterns
+
 admin.site.site_header = "BuildCorp – Administración"
 admin.site.site_title = "BuildCorp"
 admin.site.index_title = "Panel de administración"
 
 api_v1 = [
     path("auth/", include("apps.usuarios.api_urls")),
+    path("", include(usuarios_urlpatterns)),
     path("", include("apps.activos.api_urls")),
     path("", include("apps.contratistas.api_urls")),
     path("", include("apps.prestamos.api_urls")),

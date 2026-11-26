@@ -408,6 +408,8 @@ Base: `/api/v1/` · Autenticación por sesión · Permisos por rol con clases co
 | Préstamos | `/prestamos/` | `POST /prestamos/cotizar/` (calcula el monto en CLP sin guardar), `POST /prestamos/{id}/asignar-activos/`, `POST /prestamos/{id}/entregar/` (con firma), `POST /prestamos/{id}/devolver/` (con firma), `GET /prestamos/atrasados/` |
 | Mantenimientos | `/mantenimientos/`, `/planes-mantenimiento/` | `GET /planes-mantenimiento/proximos/` |
 | Alertas | `/alertas/` | `POST /alertas/{id}/marcar-leida/` |
+| Usuarios (trabajadores) | `GET/POST /usuarios/`, `GET/PATCH /usuarios/{id}/` (solo Admin) | `POST /usuarios/{id}/activar/`, `POST /usuarios/{id}/desactivar/` (cierra sus sesiones), `POST /usuarios/{id}/restablecer-clave/`, `GET /usuarios/roles/`. No se borran: se desactivan |
+| Parámetros | `GET /parametros/` (Admin, Ventas), `PUT/PATCH /parametros/` (solo Admin) | Días de gracia, recargo por atraso e IVA |
 | Dashboard | `GET /dashboard/resumen/` | KPIs: activos por estado, préstamos activos o atrasados, mantenciones vencidas y cobros pendientes |
 
 Filtros con `django-filter`: estado, categoría, bodega, contratista y rango de fechas.
@@ -433,7 +435,10 @@ Filtros con `django-filter`: estado, categoría, bodega, contratista y rango de 
 | Comprobante | Todos | Vista imprimible con las firmas |
 | Mantenimientos | Admin, Bodeguero | Calendario o lista de próximas y vencidas, y registro |
 | Cobros | Admin, Ventas | Detalle calculado por préstamo |
-| Alertas | Todos | Bandeja de alertas |
+| Alertas | Todos | Bandeja de alertas (el Admin resuelve solicitudes de desbloqueo y de baja) |
+| Trabajadores | Admin | Crear trabajadores con rol y clave inicial, editar, cambiar rol, activar/desactivar y restablecer clave |
+| Parámetros | Admin (Ventas solo lectura) | Días de gracia, recargo por atraso e IVA |
+| Categorías y tarifas | Todos (escribe Admin) | Tarifas en CLP y frecuencia de mantención por categoría |
 
 Diseño responsivo con Bootstrap. Las pantallas de entrega y devolución se piensan **para tablet o celular**, porque se usan en terreno.
 

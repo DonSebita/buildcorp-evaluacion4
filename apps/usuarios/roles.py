@@ -26,3 +26,13 @@ def rol_de(usuario):
 def tiene_rol(usuario, *permitidos):
     rol = rol_de(usuario)
     return rol is not None and (rol == ADMIN or rol in permitidos)
+
+
+def asignar_rol(usuario, rol):
+    """Deja al usuario con un solo rol (Grupo). Los grupos que no son roles no se tocan."""
+    from django.contrib.auth.models import Group
+
+    if rol not in TODOS:
+        raise ValueError(f"Rol desconocido: {rol}")
+    usuario.groups.remove(*Group.objects.filter(name__in=TODOS).exclude(name=rol))
+    usuario.groups.add(Group.objects.get_or_create(name=rol)[0])

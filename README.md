@@ -219,6 +219,8 @@ Base `/api/v1/`, autenticación por sesión y permisos por rol (`apps/usuarios/p
 | Cobros | `/cobros/`, `POST /cobros/{id}/pagar/` |
 | Mantenimiento | `/mantenimientos/`, `/planes-mantenimiento/proximos/` |
 | Alertas | `/alertas/`, `POST /alertas/{id}/marcar-leida/` |
+| Trabajadores (solo Admin) | `/usuarios/`, `POST /usuarios/{id}/activar/`, `POST /usuarios/{id}/desactivar/`, `POST /usuarios/{id}/restablecer-clave/` |
+| Parámetros | `GET /parametros/` (Admin, Ventas), `PATCH /parametros/` (Admin) |
 | Dashboard | `GET /dashboard/resumen/` |
 
 Los errores de negocio responden **400** con un mensaje legible (`{"detail": "La devolución pactada no puede ser anterior a la entrega."}`) y los de permisos **403**.

@@ -442,3 +442,19 @@ Este archivo registra las consultas y la ayuda pedida a herramientas de IA duran
 **Archivos:** `prompts_ia.md` (modificado)
 
 ---
+
+### #34 · 2026-11-26 · Funciones de Administrador: trabajadores, parámetros, alertas, cobros y categorías
+
+**Prompt:**
+> al administrador le faltan cosas, como agregar trabajadores o toda pega de administrador o jefe, revisa que hace cada usuario y añade funciones si son necesarias
+
+**Apoyo de la IA:**
+- Revisó la matriz de permisos de `PLANIFICACION.md` contra el API y el frontend Vite: faltaba "Gestionar usuarios y roles" (solo existía en Django Admin), el API de parámetros y las pantallas Vite de alertas, cobros y categorías.
+- API nuevo `/api/v1/usuarios/` (solo Administrador): listar con filtros por rol y estado, crear con rol y clave inicial validada, editar y cambiar rol, activar/desactivar (cierra sus sesiones JWT) y restablecer clave. No se borran trabajadores, para conservar el historial. El Admin no puede quitarse su rol ni desactivarse.
+- API nuevo `/api/v1/parametros/` (lectura Admin y Ventas, escritura solo Admin) y respuesta 409 al eliminar una categoría con activos.
+- Pantallas Vite nuevas: Trabajadores, Parámetros, Alertas (resolver solicitudes), Cobros (registrar pago) y Categorías y tarifas; menú del riel actualizado por rol.
+- 18 pruebas nuevas (401/403 por rol, validaciones, sesiones cerradas al desactivar); total 74 en verde.
+
+**Archivos:** `apps/usuarios/api.py`, `apps/usuarios/api_urls.py`, `apps/usuarios/serializers.py`, `apps/usuarios/roles.py`, `apps/usuarios/tests/test_gestion.py` (creado), `apps/prestamos/api.py`, `apps/prestamos/api_urls.py`, `apps/prestamos/serializers.py`, `apps/activos/api.py`, `buildcorp/urls.py`, `frontend/src/App.jsx`, `frontend/src/auth/roles.js`, `frontend/src/pages/dashboard/enlaces.js`, `frontend/src/pages/{usuarios,parametros,alertas,cobros,categorias}/` (creados), `PLANIFICACION.md`, `README.md` (modificados)
+
+---
